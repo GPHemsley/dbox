@@ -36,6 +36,11 @@ require( ROOT . 'inc/database/database.' . $config['db']['type'] . '.php' );
 
 $Database = new Database( $config['db']['server'], $config['db']['port'], $config['db']['username'], $config['db']['password'], $config['db']['database'] );
 
+require( ROOT . 'inc/lib/lib.changes.php' );
+
+// Make sure we can track changes as early as possible, just in case.
+$Changes = new Changes();
+
 require( ROOT . 'inc/lib/lib.sessions.php' );
 require( ROOT . 'inc/lib/lib.user.php' );
 

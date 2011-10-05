@@ -6,7 +6,7 @@
  * This is the style header for all pages.
  *
  * @package dbox
- * @copyright (C) 2006-2011 Gordon P. Hemsley
+ * @copyright (C) 2006-2010, 2011 Gordon P. Hemsley
  * @license docs/LICENSE BSD License
  */
 

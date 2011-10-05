@@ -1,0 +1,402 @@
+/**
+ * dbox :: style/screen.css
+ *
+ * Style information for screen media.
+ *
+ * @package dbox
+ * @copyright (C) 2006-2011 Gordon P. Hemsley
+ * @license docs/LICENSE BSD License
+ */
+
+/**
+* Generic styling
+*/
+body {
+	background-color: #FFFFEE;
+	color: black;
+/*	font-family: "Lucida Grande", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Sans", Verdana, Helvetica, Tahoma, "Arial Unicode MS", Arial, sans-serif;*/
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 110%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover, a:focus, a:active {
+	text-decoration: underline;
+}
+
+a:link {
+	background-color: inherit;
+	color: #00539F;
+}
+
+a:visited {
+	background-color: inherit;
+	color: #00A0DF;
+}
+
+a:focus {
+	background-color: inherit;
+	color: red;
+}
+
+a:active {
+	background-color: inherit;
+	color: magenta;
+}
+
+img, embed {
+	border: none;
+}
+
+h1 {
+	background-color: #00539F;
+	color: white;
+	font-size: 150%; /* 18pt; */
+}
+
+h2 {
+	background-color: inherit;
+	color: #770077;
+	font-size: 133.333%; /* 16pt; */
+/*	text-decoration: underline;*/
+}
+
+h3 {
+	background-color: inherit;
+	color: #AA00AA;
+	font-size: 116.667%; /* 14pt;*/
+}
+
+h4 {
+	font-size: 100%; /* 12pt; */
+	font-weight: bolder;
+	text-decoration: underline;
+}
+
+h5 {
+	font-size: 91.667%; /* 11pt; */
+}
+
+h6 {
+	font-size: 83.333%; /* 10pt; */
+}
+
+p.message {
+	width: 96%;
+	margin: 1em auto;
+	padding: 1em;
+	background-color: lightgray;
+	color: black;
+	border: 1px solid gray;
+}
+
+p.message strong {
+	display: block;
+	margin-bottom: 0.5em;
+	font-weight: bolder;
+	font-size: larger;
+	text-transform: capitalize;
+}
+
+p.message a {
+	font-weight: bolder;
+}
+
+p.message.good {
+	background-color: #C0FFCB; /* green counterpart of pink */
+	color: black;
+	border: 1px solid green;
+}
+
+p.message.bad {
+	background-color: #FFC0CB; /* pink */
+	color: black;
+	border: 1px solid red;
+}
+
+p.message.system {
+	background-color: #C0CBFF; /* blue counterpart of pink */
+	color: black;
+	border: 1px solid blue;
+}
+
+p.message.good strong {
+	background-color: transparent;
+	color: darkgreen;
+}
+
+p.message.bad strong {
+	background-color: transparent;
+	color: darkred;
+}
+
+p.message.system strong {
+	background-color: transparent;
+	color: darkblue;
+}
+
+table {
+	padding: 0px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+table.list {
+	clear: both;
+	width: 100%;
+	margin: 1em auto;
+	padding: 0.25em;
+	text-align: center;
+}
+
+form {
+	padding: 1em;
+	border: 3px double black;
+}
+
+form h1, form h2, form h3, form h4, form h5, form h6 {
+	margin: 0em;
+}
+
+span.checkbox {
+	padding: 0em 0.5em 0em 0em;
+}
+
+/**
+* Header on every page
+*/
+#header {
+	background-color: #00539F;
+	color: white;
+	width: 96%;
+	margin: auto;
+	border-top-left-radius: 1%;
+	border-top-right-radius: 1%;
+	-moz-border-radius-topleft: 1%;
+	-moz-border-radius-topright: 1%;
+	-webkit-border-top-left-radius: 1%;
+	-webkit-border-top-right-radius: 1%;
+	padding: 0.5em 0em;
+	text-align: center;
+}
+
+#logo {
+	float: left;
+	width: 77px;
+	height: 77px;
+	margin: 0em;
+	padding: 0em 1em;
+}
+
+#logo img {
+	width: 75px;
+	height: 75px;
+	border: 1px solid white;
+}
+
+#title {
+	width: 75%;
+	margin: 0.5em auto 1em;
+}
+
+#title h1 {
+	margin: 0em;
+}
+
+#user-links {
+	float: right;
+	margin: 0em;
+	padding: 0em 1em;
+	font-weight: bolder;
+}
+
+#user-links a {
+	background-color: inherit;
+	color: white;
+}
+
+#navigation {
+	background-color: #00539F;
+	color: white;
+	width: 96%;
+	text-align: center;
+	margin: auto;
+	padding: 0px;
+	border-bottom: 1px solid black;
+}
+
+#navigation ul {
+	margin: 0px auto;
+	padding: 0px;
+	width: 75%;
+}
+
+#navigation ul li {
+	display: inline;
+	white-space: nowrap;
+	margin: 0px;
+	padding: 0em;
+	height: 100%;
+	border: 1px solid black;
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+	-moz-border-radius-topleft: 1em;
+	-moz-border-radius-topright: 1em;
+	-webkit-border-top-left-radius: 1em;
+	-webkit-border-top-right-radius: 1em;
+	background-color: #FFD200;
+	color: black;
+}
+
+#navigation ul li a {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+	-moz-border-radius-topleft: 1em;
+	-moz-border-radius-topright: 1em;
+	-webkit-border-top-left-radius: 1em;
+	-webkit-border-top-right-radius: 1em;
+	padding: 0em 2em;
+}
+
+#navigation ul li.selected a, #navigation ul li:hover a, #navigation ul li:focus a {
+	background-color: #00A0DF;
+	color: white;
+}
+
+#breadcrumbs {
+	width: 96%;
+	margin: 0em auto;
+	font-size: smaller;
+}
+
+#global-msg, #page-content {
+	width: 96%;
+	margin: 0% auto;
+}
+
+#global-msg p.message {
+	margin-top: 0em;
+}
+
+#global-msg + #page-content > * > #sub-nav {
+	margin-top: 2em;
+}
+
+#sub-nav {
+	width: 96%;
+	text-align: center;
+	margin: auto;
+	padding: 0em 0em 1em;
+}
+
+#sub-nav ul {
+	margin: 1em auto;
+	padding: 0em;
+}
+
+#sub-nav ul li {
+	display: inline;
+	white-space: nowrap;
+	margin: 0em 0.25em;
+	padding: 0.5em 0em;
+	height: 100%;
+	border: 1px solid black;
+	border-radius: 0.5em;
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	background-color: #FFDDFF;
+	color: black;
+}
+
+#sub-nav ul li a {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	border-radius: 0.5em;
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	padding: 0.5em 2em;
+}
+
+#sub-nav ul li.selected a, #sub-nav ul li:hover a, #sub-nav ul li:focus a {
+	background-color: #994499;
+	color: white;
+}
+
+/**
+* Table list styling
+*/
+table.list th {
+	background-color: #8F8F8F;
+	color: black;
+}
+
+table.list th, table.list td {
+	text-align: center;
+	margin: auto;
+	border: 1px solid black;
+	padding: 0.25em;
+}
+
+table.list td.edit {
+	background-color: #FFFFEE;
+	color: black;
+}
+
+table.list tr:nth-child(odd), table.list tr:nth-child(odd) td.edit {
+	background-color: #FFFFEE;
+	color: black;
+}
+
+table.list tr:nth-child(even), table.list tr:nth-child(even) td.edit {
+	background-color: #FFDDFF;
+	color: black;
+}
+
+table.list tr td.edit {
+	padding: 0em 1em;
+	border-right: 2px solid black;
+	font-weight: bolder;
+}
+
+/**
+* Footer on every page
+*/
+#copyright, #debug {
+	clear: both;
+	text-align: center;
+	margin: auto;
+	padding-top: 1em;
+}
+
+#copyright {
+	font-size: small;
+}
+
+#debug {
+	font-size: x-small;
+}
+
+#copyright p, #debug p {
+	margin: 0px;
+}
+
+/**
+* Home page styling (task lists)
+*/
+#left-column, #center-column, #right-column {
+	float: left;
+	width: 31.698%;
+	border-left: 1px solid #7F007F;
+	padding: 0% 0.75%;
+}
+
+#right-column {
+	float: right;
+}

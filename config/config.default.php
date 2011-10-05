@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * dbox :: config.default.php
+ *
+ * Default configuration file.
+ *
+ * @package dbox
+ * @copyright (C) 2006-2011 Gordon P. Hemsley
+ * @license docs/LICENSE BSD License
+ */
+
+/**
+ * Database connection information
+ */
+$config['db']['type'] = 'mysql';
+
+$config['db']['server'] = 'localhost';
+$config['db']['port'] = '3306';
+
+$config['db']['username'] = 'root';
+$config['db']['password'] = '';
+
+$config['db']['database'] = 'dbox';
+
+/**
+ * Information about the server setup.
+ */
+$config['server']['domain'] = 'localhost';
+$config['server']['path'] = '/';
+
+/**
+ * Global message, displayed on every page.
+ */
+$config['message'] = array(
+	array(
+		'type'		=>	'',
+		'title'		=>	'',
+		'message'	=>	''
+	)
+);
+
+/**
+ * Version information.
+ */
+
+define( 'DBOX_VERSION', '0.1.0-dev' );
+
+?>

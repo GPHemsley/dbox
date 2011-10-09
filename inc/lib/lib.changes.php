@@ -50,8 +50,6 @@ class Changes
 		$sql = "INSERT INTO changes ( change_type, user_id, item_id, new_value, old_value, timestamp )
 			VALUES ( '" . $Database->escape( $change_type ) . "', " . $Database->escape( $user_id ) . ", " . $Database->escape( $item_id ) . ", '" . $Database->escape( $new_value ) . "', $old_value, " . time() . " )";
 
-		var_dump( $sql );
-
 		if( $result = $Database->query( $sql ) )
 		{
 			return TRUE;

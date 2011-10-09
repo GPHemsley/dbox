@@ -35,6 +35,8 @@ $dbox = new Home();
 
 ?>
 
+<p style="width: 50%; margin: auto; border: 3px double black; text-align: center;">I haven't decided what to put here yet.<br />Proceed to the <a href="<?php print ROOT; ?>records.php">Records</a> page.</p>
+
 <?php
 
 /**

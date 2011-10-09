@@ -293,6 +293,16 @@ class Database
 	}
 
 	/**
+	 * Database::insert_id()
+	 *
+	 * Get last insert id
+	 */
+	function insert_id()
+	{
+		return @mysqli_insert_id( $this->ident_link );
+	}
+
+	/**
 	 * Database::version()
 	 *
 	 * Get version number

@@ -84,6 +84,22 @@ h6 {
 	font-size: 83.333%; /* 10pt; */
 }
 
+.good {
+	background-color: #C0FFCB !important; /* green counterpart of pink */
+}
+
+.marginal {
+	background-color: #FFF4C0 !important; /* yellow counterpart of pink */
+}
+
+.bad {
+	background-color: #FFC0CB !important; /* pink */
+}
+
+.neutral, .system {
+	background-color: #C0CBFF !important; /* blue counterpart of pink */
+}
+
 p.message {
 	width: 96%;
 	margin: 1em auto;
@@ -106,19 +122,16 @@ p.message a {
 }
 
 p.message.good {
-	background-color: #C0FFCB; /* green counterpart of pink */
 	color: black;
 	border: 1px solid green;
 }
 
 p.message.bad {
-	background-color: #FFC0CB; /* pink */
 	color: black;
 	border: 1px solid red;
 }
 
 p.message.system {
-	background-color: #C0CBFF; /* blue counterpart of pink */
 	color: black;
 	border: 1px solid blue;
 }
@@ -159,6 +172,18 @@ form {
 
 form h1, form h2, form h3, form h4, form h5, form h6 {
 	margin: 0em;
+}
+
+input[type="text"], input[type="password"] {
+	font-size: 200%;
+}
+
+input[type="submit"], textarea {
+	font-size: 125%;
+}
+
+textarea {
+	font-family: inherit;
 }
 
 span.checkbox {
@@ -310,7 +335,7 @@ span.checkbox {
 	border-radius: 0.5em;
 	-moz-border-radius: 0.5em;
 	-webkit-border-radius: 0.5em;
-	background-color: #FFDDFF;
+	background-color: #FFD200;/*#FFDDFF;*/
 	color: black;
 }
 
@@ -325,7 +350,7 @@ span.checkbox {
 }
 
 #sub-nav ul li.selected a, #sub-nav ul li:hover a, #sub-nav ul li:focus a {
-	background-color: #994499;
+	background-color: #00A0DF;/*#994499;*/
 	color: white;
 }
 
@@ -344,7 +369,7 @@ table.list th, table.list td {
 	padding: 0.25em;
 }
 
-table.list td.edit {
+/*table.list td.edit {
 	background-color: #FFFFEE;
 	color: black;
 }
@@ -357,7 +382,7 @@ table.list tr:nth-child(odd), table.list tr:nth-child(odd) td.edit {
 table.list tr:nth-child(even), table.list tr:nth-child(even) td.edit {
 	background-color: #FFDDFF;
 	color: black;
-}
+}*/
 
 table.list tr td.edit {
 	padding: 0em 1em;

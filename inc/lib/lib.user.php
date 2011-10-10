@@ -111,7 +111,7 @@ class User
 		global $Database;
 
 		$sql = "SELECT u.email_address
-			FROM u.users
+			FROM users u
 			WHERE u.email_address = '" . $Database->escape( $email_address ) . "'";
 
 		$result = $Database->query( $sql );

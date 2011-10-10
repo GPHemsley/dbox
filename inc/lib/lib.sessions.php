@@ -150,8 +150,8 @@ class Sessions
 
 		if( $result = $Database->query( $sql ) )
 		{
-//			setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], $config['server']['domain'], FALSE, TRUE );
-			setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], '', FALSE, TRUE );
+//			@setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], $config['server']['domain'], FALSE, TRUE );
+			@setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], '', FALSE, TRUE );
 
 			$this->user_id = $user_id;
 			$this->logged_in = ( $user_id > USER_ANONYMOUS ) ? TRUE : FALSE;
@@ -202,8 +202,8 @@ class Sessions
 
 		if( $result = $Database->query( $sql ) )
 		{
-//			setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], $config['server']['domain'], FALSE, TRUE );
-			setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], '', FALSE, TRUE );
+//			@setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], $config['server']['domain'], FALSE, TRUE );
+			@setcookie( 'dbox_session_hash', $session_hash, $time_then, $config['server']['path'], '', FALSE, TRUE );
 
 			$this->user_id = $user_id;
 			$this->logged_in = ( $user_id > USER_ANONYMOUS ) ? TRUE : FALSE;

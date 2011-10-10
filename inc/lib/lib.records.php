@@ -39,7 +39,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : 1;
+			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : 2; // TODO: Use a constant here!
 
 //			else
 			{
@@ -144,7 +144,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : 1;
+			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : 2; // TODO: Use a constant here!
 
 //			else
 			{

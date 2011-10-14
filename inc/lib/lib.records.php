@@ -44,7 +44,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
+			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
 
 //			else
 			{
@@ -78,11 +78,17 @@ class Records extends Base
 				)
 			),
 			array(
-				'type'	=>	'hidden',//'radio',
+				'type'	=>	'radio',
 				'name'	=>	'grammaticality',
 				'label'	=>	'Grammaticality',
 				'data'	=>	array(
-					'value'	=>	G_GOOD
+					'values'	=>	array(
+						G_GOOD	=>	'Grammatical',
+//						G_OKAY	=>	'Okay',
+						G_MARGINAL	=>	'Marginal',
+//						G_NOTSOBAD	=>	'Not so bad',
+						G_BAD	=>	'Ungrammatical',
+					)
 				)
 			),
 			array(
@@ -150,7 +156,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
+			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
 
 //			else
 			{
@@ -183,17 +189,24 @@ class Records extends Base
 		$form_data = array(
 			array(
 				'type'	=>	'header',
-				'label'	=>	'Add Record',
+				'label'	=>	'Edit Record',
 				'data'	=>	array(
 					'level'	=>	2,
 				)
 			),
 			array(
-				'type'	=>	'hidden',//'radio',
+				'type'	=>	'radio',
 				'name'	=>	'grammaticality',
 				'label'	=>	'Grammaticality',
 				'data'	=>	array(
-					'value'	=>	$record['grammaticality']
+					'checked'	=>	$record['grammaticality'],
+					'values'	=>	array(
+						G_GOOD	=>	'Grammatical',
+//						G_OKAY	=>	'Okay',
+						G_MARGINAL	=>	'Marginal',
+//						G_NOTSOBAD	=>	'Not so bad',
+						G_BAD	=>	'Ungrammatical',
+					)
 				)
 			),
 			array(
@@ -312,30 +325,37 @@ class Records extends Base
 			switch( $row['grammaticality'] )
 			{
 				case G_BAD:
+					$g_class = 'bad';
 					$g_symbol = '*';
 				break;
 
 				case G_NOTSOBAD:
+//					$g_class = 'notsobad';
+					$g_class = 'marginal';
 					$g_symbol = '*?';
 				break;
 
 				case G_MARGINAL:
+					$g_class = 'marginal';
 					$g_symbol = '%';
 				break;
 
 				case G_OKAY:
+//					$g_class = 'okay';
+					$g_class = 'marginal';
 					$g_symbol = '?';
 				break;
 
 				case G_GOOD:
 				default:
+					$g_class = 'good';
 					$g_symbol = '';
 				break;
 
 			}
 
 			$rows[] = array(
-				'class'		=>	( $row['grammaticality'] < G_OKAY ) ? 'bad' : ( ( $row['grammaticality'] > G_OKAY ) ? 'good' : 'marginal' ), // TODO: Use 5-way distinction
+				'class'		=>	$g_class,
 				'content'	=>	array(
 					0	=>	array(
 						'class'		=>	'edit',

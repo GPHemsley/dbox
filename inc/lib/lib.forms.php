@@ -363,6 +363,19 @@ class Forms
 					print "</p>\n";
 				break;
 
+				case 'radio':
+					print "\t\t<p>\n";
+
+					foreach( $id_data['data']['values'] as $value => $label )
+					{
+						$checked = ( $id_data['data']['checked'] == $value ) ? ' checked' : '';
+
+						print "\t\t\t" . '<label><input id="' . $id_data['id'] . ':' . ( $value + 3 ) . '" name="' . $id_data['name'] . '" type="radio" value="' . $value . '"' . $checked . ' />' . htmlentities( $label, ENT_QUOTES, 'UTF-8' ) . '</label><br />' . "\n";
+					}
+
+					print "\t\t</p>\n";
+				break;
+
 				case 'boolean':
 					print "\t\t<p>";
 					print '<label><input id="' . $id_data['id'] . '" name="' . $id_data['name'] . '" type="checkbox" value="1" />' . htmlentities( $id_data['label'], ENT_QUOTES, 'UTF-8' ) . '</label>';

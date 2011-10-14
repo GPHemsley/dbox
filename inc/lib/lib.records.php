@@ -28,6 +28,11 @@ class Records extends Base
 //		$Changes->track_change( 'test_records', $User->user_info['id'], -1, 'Test', NULL );
 	}*/
 
+	private function _csv_escape( $string )
+	{
+		return str_replace( '"', '""', $string );
+	}
+
 	public function add_record()
 	{
 		global $Database, $Changes, $User;
@@ -39,7 +44,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : 2; // TODO: Use a constant here!
+			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
 
 //			else
 			{
@@ -144,7 +149,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : 2; // TODO: Use a constant here!
+			$grammaticality = ( exists( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
 
 //			else
 			{
@@ -242,49 +247,42 @@ class Records extends Base
 		);
 		$headers[0] = array();
 
+		$columns[1] = array(
+			'style'	=>	'width: 5%;'
+		);
+		$headers[1] = array(
+			'content'	=>	'No.'
+		);
+
 /*		if( !$language_where )
 		{
-			$columns[1] = array(
+			$columns[2] = array(
 //				'style'	=>	'width: 7.5%;'
 			);
-			$headers[1] = array(
+			$headers[2] = array(
 				'content'	=>	'Language'
 			);
 		}*/
 
-		$columns[2] = array(
-			'style'	=>	'width: 22.5%;'
-		);
-		$headers[2] = array(
-			'content'	=>	'Transcription'
-		);
-
 		$columns[3] = array(
-			'style'	=>	'width: 22.5%;'
+//			'style'	=>	'width: 42.5%;'
 		);
 		$headers[3] = array(
-			'content'	=>	'Translation'
+			'content'	=>	'Elicitation'
 		);
 
 		$columns[4] = array(
-			'style'	=>	'width: 20%;'
+			'style'	=>	'width: 30%;'
 		);
 		$headers[4] = array(
 			'content'	=>	'Comments'
 		);
 
 		$columns[5] = array(
-			'style'	=>	'width: 10%;'
+			'style'	=>	'width: 15%;'
 		);
 		$headers[5] = array(
-			'content'	=>	'Creator'
-		);
-
-		$columns[6] = array(
-			'style'	=>	'width: 10%;'
-		);
-		$headers[6] = array(
-			'content'	=>	'Creation Time'
+			'content'	=>	'Transcriber'
 		);
 
 		$sql = 'SELECT r.*, u.name
@@ -309,31 +307,53 @@ class Records extends Base
 
 		while( $row = $Database->fetch_assoc( $result ) )
 		{
+			switch( $row['grammaticality'] )
+			{
+				case G_BAD:
+					$g_symbol = '*';
+				break;
+
+				case G_NOTSOBAD:
+					$g_symbol = '*?';
+				break;
+
+				case G_MARGINAL:
+					$g_symbol = '%';
+				break;
+
+				case G_OKAY:
+					$g_symbol = '?';
+				break;
+
+				case G_GOOD:
+				default:
+					$g_symbol = '';
+				break;
+
+			}
+
 			$rows[] = array(
-				'class'		=>	( $row['grammaticality'] < 1 ) ? 'bad' : ( ( $row['grammaticality'] > 1 ) ? 'good' : 'marginal' ),
+				'class'		=>	( $row['grammaticality'] < G_OKAY ) ? 'bad' : ( ( $row['grammaticality'] > G_OKAY ) ? 'good' : 'marginal' ), // TODO: Use 5-way distinction
 				'content'	=>	array(
 					0	=>	array(
 						'class'		=>	'edit',
 						'content'	=>	'<a href="' . ROOT . 'records.php?mode=edit&amp;record_id=' . $row['record_id'] . '">edit</a>'
 					),
-					1	=>	/*( $language_where ) ? array() :*/ array(
+					1	=>	array(
+						'content'	=>	'(' . $row['record_id'] . ')'
+					),
+					2	=>	/*( $language_where ) ? array() :*/ array(
 //						'content'	=>	$this->format_language( $row['language'] )
 					),
-					2	=>	array(
-						'content'	=>	$this->convert_newlines( htmlentities( $row['transcription'], ENT_QUOTES, 'UTF-8' ) )
-					),
 					3	=>	array(
-						'content'	=>	$this->convert_newlines( htmlentities( $row['translation'], ENT_QUOTES, 'UTF-8' ) )
+						'content'	=>	'<span class="transcription"><span class="g-symbol">' . $g_symbol . '</span>' . $this->convert_newlines( htmlentities( $row['transcription'], ENT_QUOTES, 'UTF-8' ) ) . '</span><br /><span class="translation">' . $this->convert_newlines( htmlentities( $row['translation'], ENT_QUOTES, 'UTF-8' ) ) . '</span>'
 					),
 					4	=>	array(
 						'content'	=>	$this->convert_newlines( htmlentities( $row['comments'], ENT_QUOTES, 'UTF-8' ) )
 					),
 					5	=>	array(
-						'content'	=>	$row['name']
+						'content'	=>	'<span class="creator">' . $row['name'] . '</span><br /><span class="creation-time">' . $this->format_date( $row['creation_time'], 'F j, Y' ) . '</span>'
 					),
-					6	=>	array(
-						'content'	=>	$this->format_date( $row['creation_time'], 'F j, Y<\b\r />g:i A' )
-					)
 				)
 			);
 		}
@@ -341,6 +361,36 @@ class Records extends Base
 		$Database->free_result( $result );
 
 		$this->print_list_table( ROOT . 'records.php', $columns, $headers, $rows );
+	}
+
+	public function export_records()
+	{
+		global $Database, $User;
+
+		header( 'Content-Type: text/csv; charset=UTF-8' );
+		header( 'Content-Disposition: attachment; filename=dbox.csv' );
+
+		$sql = 'SELECT r.*, u.name
+			FROM records r
+			LEFT JOIN ( users u )
+				ON ( r.creator_id = u.user_id )
+			ORDER BY r.creation_time ASC';
+
+		$result = $Database->query( $sql );
+
+		if( !$Database->has_result( $result ) )
+		{
+			// Oh well.
+		}
+
+		print 'record_id,transcription,translation,comments,grammaticality,creator_id,creation_time' . "\n";
+
+		while( $row = $Database->fetch_assoc( $result ) )
+		{
+			print $row['record_id'] . ',"' . $this->_csv_escape( $row['transcription'] ) . '","' . $this->_csv_escape( $row['translation'] ) . '","' . $this->_csv_escape( $row['comments'] ) . '",' . $row['grammaticality'] . ',' . $row['creator_id'] . ',' . $row['creation_time'] . "\n";
+		}
+
+		$Database->free_result( $result );
 	}
 }
 

@@ -425,3 +425,35 @@ table.list tr td.edit {
 #right-column {
 	float: right;
 }
+
+/**
+ * Records
+ */
+.transcription {
+	font-size: larger;
+}
+
+.transcription .g-symbol {
+	font-size: smaller;
+	vertical-align: super;
+}
+
+.translation::before {
+	content: '\2018';
+}
+
+.translation::after {
+	content: '\2019';
+}
+
+.translation {
+
+}
+
+.creator {
+
+}
+
+.creation-time {
+	font-size: smaller;
+}

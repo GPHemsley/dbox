@@ -23,8 +23,19 @@ $page_title = array( 'Records' );
 $tab = 'records';
 
 require( ROOT . 'inc/inc.main.php' );
+require( ROOT . 'inc/lib/lib.records.php' );
+
+$dbox = new Records();
 
 $mode = ( exists( $_REQUEST['mode'] ) ) ? $_REQUEST['mode'] : 'view';
+$record_id = ( exists( $_REQUEST['record_id'] ) ) ? (int) $_REQUEST['record_id'] : FALSE;
+
+if( $mode == 'export' )
+{
+	$dbox->export_records();
+
+	exit;
+}
 
 /**
  * Have the title reflect the mode.
@@ -50,12 +61,6 @@ switch( $mode )
  */
 include( ROOT . 'style/header.php' );
 
-require( ROOT . 'inc/lib/lib.records.php' );
-
-$dbox = new Records();
-
-$record_id = ( exists( $_REQUEST['record_id'] ) ) ? (int) $_REQUEST['record_id'] : FALSE;
-
 $sub_nav = array(
 	'view'	=>	array(
 		'title'	=>	'View Records',
@@ -64,7 +69,11 @@ $sub_nav = array(
 	'add'	=>	array(
 		'title'	=>	'Add Record',
 		'url'	=>	ROOT . 'records.php?mode=add'
-	)
+	),
+	'export'	=>	array(
+		'title'	=>	'Export Records',
+		'url'	=>	ROOT . 'records.php?mode=export'
+	),
 );
 
 ?>

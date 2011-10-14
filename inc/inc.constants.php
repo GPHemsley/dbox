@@ -35,4 +35,13 @@ define( 'UT_STUDENT', 0 );
 define( 'UT_INSTRUCTOR', 10 );
 define( 'UT_ADMIN', 100 );
 
+/**
+ * Grammaticality judgements
+ */
+define( 'G_GOOD', 2 );		//
+define( 'G_OKAY', 1 );		// ?
+define( 'G_MARGINAL', 0 );	// %
+define( 'G_NOTSOBAD', -1 );	// *?
+define( 'G_BAD', -2 );		// *
+
 ?>

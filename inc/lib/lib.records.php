@@ -78,10 +78,11 @@ class Records extends Base
 				)
 			),
 			array(
-				'type'	=>	'radio',
+				'type'	=>	'hidden',//'radio',
 				'name'	=>	'grammaticality',
 				'label'	=>	'Grammaticality',
 				'data'	=>	array(
+					'value'	=>	2 // TODO: Use a constant here!
 				)
 			),
 			array(
@@ -188,10 +189,11 @@ class Records extends Base
 				)
 			),
 			array(
-				'type'	=>	'radio',
+				'type'	=>	'hidden',//'radio',
 				'name'	=>	'grammaticality',
 				'label'	=>	'Grammaticality',
 				'data'	=>	array(
+					'value'	=>	$record['grammaticality']
 				)
 			),
 			array(

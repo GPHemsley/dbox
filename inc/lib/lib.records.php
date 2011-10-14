@@ -82,7 +82,7 @@ class Records extends Base
 				'name'	=>	'grammaticality',
 				'label'	=>	'Grammaticality',
 				'data'	=>	array(
-					'value'	=>	2 // TODO: Use a constant here!
+					'value'	=>	G_GOOD
 				)
 			),
 			array(

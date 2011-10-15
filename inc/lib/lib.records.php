@@ -64,7 +64,7 @@ class Records extends Base
 
 					$Changes->track_change( 'add_record', $User->user_info['id'], $Database->insert_id(), serialize( $new_value ) );
 
-					print_message( 'good', 'Record for  &quot;' . htmlentities( $transcription, ENT_QUOTES, 'UTF-8' ) . '&quot; added successfully.', 'Addition succeeded.' );
+					print_message( 'good', 'Record for &quot;' . htmlentities( $transcription, ENT_QUOTES, 'UTF-8' ) . '&quot; added successfully.', 'Addition succeeded.' );
 				}
 			}
 		}
@@ -177,7 +177,7 @@ class Records extends Base
 
 					$Changes->track_change( 'edit_record', $User->user_info['id'], $record_id, serialize( $new_value ), serialize( $record ) );
 
-					print_message( 'good', 'Record for  &quot;' . htmlentities( $transcription, ENT_QUOTES, 'UTF-8' ) . '&quot; update successfully.', 'Update succeeded.' );
+					print_message( 'good', 'Record for &quot;' . htmlentities( $transcription, ENT_QUOTES, 'UTF-8' ) . '&quot; update successfully.', 'Update succeeded.' );
 
 					$this->view_records();
 

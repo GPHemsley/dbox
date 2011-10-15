@@ -24,7 +24,7 @@ if( !isset( $tab ) )
 	$tab = FALSE;
 }
 
-$tab_home = $tab_records = $tab_morphology = '';
+$tab_home = $tab_records = $tab_dictionary = '';
 
 switch( $tab )
 {
@@ -36,8 +36,8 @@ switch( $tab )
 		$tab_records = ' class="selected"';
 	break;
 
-	case 'morphology':
-		$tab_morphology = ' class="selected"';
+	case 'dictionary':
+		$tab_dictionary = ' class="selected"';
 	break;
 }
 
@@ -88,8 +88,8 @@ else
 <div id="navigation">
 	<ul>
 		<li<?php print $tab_home; ?>><a href="<?php print ROOT; ?>index.php">Home</a></li>
-		<li<?php print $tab_records; ?>><a href="<?php print ROOT; ?>records.php">Records</a></li>
-		<li<?php print $tab_morphology; ?>><a href="<?php print ROOT; ?>morphology.php">Morphology</a></li>
+		<li<?php print $tab_records; ?>><a href="<?php print ROOT; ?>records.php">Elicitations</a></li>
+		<li<?php print $tab_dictionary; ?>><a href="<?php print ROOT; ?>dictionary.php">Dictionary</a></li>
 	</ul>
 </div>
 

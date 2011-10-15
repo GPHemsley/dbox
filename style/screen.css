@@ -235,12 +235,12 @@ span.checkbox {
 	float: right;
 	margin: 0em;
 	padding: 0em 1em;
-	font-weight: bolder;
 }
 
 #user-links a {
 	background-color: inherit;
 	color: white;
+	font-weight: bolder;
 }
 
 #navigation {

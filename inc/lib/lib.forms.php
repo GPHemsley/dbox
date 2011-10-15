@@ -368,7 +368,7 @@ class Forms
 
 					foreach( $id_data['data']['values'] as $value => $label )
 					{
-						$checked = ( $id_data['data']['checked'] == $value ) ? ' checked' : '';
+						$checked = ( isset( $id_data['data']['checked'] ) && ( $id_data['data']['checked'] == $value ) ) ? ' checked' : '';
 
 						print "\t\t\t" . '<label><input id="' . $id_data['id'] . ':' . ( $value + 3 ) . '" name="' . $id_data['name'] . '" type="radio" value="' . $value . '"' . $checked . ' />' . htmlentities( $label, ENT_QUOTES, 'UTF-8' ) . '</label><br />' . "\n";
 					}

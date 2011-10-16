@@ -249,6 +249,11 @@ class Forms
 						print ' maxlength="' . (int) $id_data['data']['maxlength'] . '"';
 					}
 
+					if( isset( $id_data['data']['autofocus'] ) && $id_data['data']['autofocus'] )
+					{
+						print ' autofocus';
+					}
+
 					print ' />';
 
 					if( isset( $id_data['label'] ) )

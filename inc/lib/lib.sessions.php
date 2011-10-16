@@ -442,6 +442,7 @@ class Sessions
 				'data'	=>	array(
 					'size'		=>	40,
 					'maxlength'	=>	320,
+					'autofocus'	=>	TRUE,
 					'value'		=>	$email_address
 				)
 			),

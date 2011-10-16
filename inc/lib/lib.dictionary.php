@@ -91,7 +91,8 @@ class Dictionary extends Base
 				'name'	=>	'morpheme',
 				'label'	=>	'Morpheme',
 				'data'	=>	array(
-					'size'	=>	30,
+					'size'		=>	30,
+					'autofocus'	=>	TRUE,
 				)
 			),
 			array(
@@ -209,8 +210,9 @@ class Dictionary extends Base
 				'name'	=>	'morpheme',
 				'label'	=>	'Morpheme',
 				'data'	=>	array(
-					'size'	=>	30,
-					'value'	=>	$entry['morpheme']
+					'size'		=>	30,
+					'autofocus'	=>	TRUE,
+					'value'		=>	$entry['morpheme'],
 				)
 			),
 			array(

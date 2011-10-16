@@ -96,7 +96,8 @@ class Records extends Base
 				'name'	=>	'transcription',
 				'label'	=>	'Transcription',
 				'data'	=>	array(
-					'size'	=>	30,
+					'size'		=>	30,
+					'autofocus'	=>	TRUE,
 				)
 			),
 			array(
@@ -214,8 +215,9 @@ class Records extends Base
 				'name'	=>	'transcription',
 				'label'	=>	'Transcription',
 				'data'	=>	array(
-					'size'	=>	30,
-					'value'	=>	$record['transcription']
+					'size'		=>	30,
+					'autofocus'	=>	TRUE,
+					'value'		=>	$record['transcription'],
 				)
 			),
 			array(

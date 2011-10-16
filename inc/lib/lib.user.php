@@ -226,6 +226,7 @@ class User
 				'data'	=>	array(
 					'size'		=>	25,
 					'maxlength'	=>	255,
+					'autofocus'	=>	TRUE,
 					'value'		=>	@$defaults['name']
 				)
 			),

@@ -26,7 +26,7 @@ if( !defined( 'ROOT' ) )
 </div>
 
 <div id="debug">
-	<p>Version <?php print DBOX_VERSION; ?></p>
+	<p><a href="<?php print ROOT; ?>docs/NEWS">Version <?php print DBOX_VERSION; ?></a></p>
 </div>
 
 </body>

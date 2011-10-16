@@ -1,0 +1,55 @@
+------------------------------------------------------------------------------
+  dbox :: docs/NEWS
+
+  List of notable changes to dbox.
+
+  Copyright (C) 2011 Gordon P. Hemsley
+  License: docs/LICENSE (BSD License)
+------------------------------------------------------------------------------
+
+]~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[
+]~~~~~~~~~~~~~~~~~~{                                       }~~~~~~~~~~~~~~~~~[
+]~~~~~~~~~~~~~~~~~~{   dbox Language Documentation Tool    }~~~~~~~~~~~~~~~~~[
+]~~~~~~~~~~~~~~~~~~{                                       }~~~~~~~~~~~~~~~~~[
+]~~~~~~~~~~~~~~~~~~{ https://bitbucket.org/gphemsley/dbox/ }~~~~~~~~~~~~~~~~~[
+]~~~~~~~~~~~~~~~~~~{                                       }~~~~~~~~~~~~~~~~~[
+]~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[
+
+
+>============================[ FUTURE RELEASES ]=============================<
+
+2011-XX-XX :: dbox 0.3
+
+* Basic glossing support.
+
+
+>============================[ CURRENT RELEASE ]=============================<
+
+2011-10-17 :: dbox 0.2
+
+* Added basic support for morphemes dictionary.
+* Added ability to export records.
+* Added ability to specify proper grammaticality judgements for elicitations.
+* Exposed record number for elicitation identification purposes.
+* Streamlined record display interface.
+* Made it so that certain input boxes automatically get focus on page load.
+* Changed formatting of page header in an attempt to clarify what are and are
+  not links.
+
+
+>=============================[ PAST RELEASES ]==============================<
+
+2011-10-10 :: dbox 0.1.1
+
+* Fixed a bug that caused the existing grammaticality judgement value of a
+  record to be overwritten upon edit.
+
+
+2011-10-10 :: dbox 0.1
+
+* Working proof of concept.
+* User registration and sessions.
+* Change tracking.
+* Transcription and translation records.
+* All elicitation records are considered fully grammatical.
+

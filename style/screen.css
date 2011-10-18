@@ -429,6 +429,20 @@ table.list tr td.edit {
 /**
  * Records
  */
+table.gloss {
+	display: inline-block;
+	margin: 0em auto;
+	border: 0px;
+	padding: 0em;
+}
+
+table.gloss th, table.gloss td {
+	margin: 0em;
+	border: 0px;
+	padding: 0em;
+	text-align: left;
+}
+
 .transcription {
 	font-size: larger;
 }
@@ -436,6 +450,17 @@ table.list tr td.edit {
 .transcription .g-symbol {
 	font-size: smaller;
 	vertical-align: super;
+}
+
+.unglossed {
+	font-weight: stronger;
+	color: #800000;
+	text-align: center !important;
+}
+
+.multiple {
+	font-weight: stronger;
+	color: #000080;
 }
 
 .translation::before {

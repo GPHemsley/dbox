@@ -33,6 +33,100 @@ class Records extends Base
 		return str_replace( '"', '""', $string );
 	}
 
+	private function _parse_record( $record )
+	{
+		global $Database;
+
+		$gloss = array();
+
+		foreach( explode( ' ', $record ) as $word_id => $word )
+		{
+			$gloss[$word] = array();
+
+			foreach( explode( '-', $word ) as $morpheme_id => $morpheme )
+			{
+				$gloss[$word][$morpheme] = array();
+
+				$sql = "SELECT d.*
+					FROM dictionary d
+					WHERE d.morpheme = '" . $Database->escape( $morpheme ) . "'";
+
+				$result = $Database->query( $sql );
+
+				if( !$Database->has_result( $result ) )
+				{
+					// No gloss available.
+				}
+
+				while( $row = $Database->fetch_assoc( $result ) )
+				{
+					$gloss[$word][$morpheme][] = $row['gloss'];
+				}
+
+				$Database->free_result( $result );
+			}
+		}
+
+		return $gloss;
+	}
+
+	private function _generate_gloss_table( $record )
+	{
+		$gloss = $this->_parse_record( $record );
+
+		$table = '';
+		$transcription_cells = $gloss_cells = array();
+		$transcription_row = $gloss_row = array();
+
+		$word_boundary = "\t\t" . '<td class="boundary-word">&nbsp;</td>' . "\n";
+		$morpheme_boundary = "\t\t" . '<td class="boundary-morpheme">-</td>' . "\n";
+
+		foreach( $gloss as $word => $morphemes )
+		{
+			foreach( $morphemes as $morpheme => $morpheme_gloss )
+			{
+				$transcription_class = '';
+
+				if( count( $morpheme_gloss ) < 1 )
+				{
+					// No gloss
+					$gloss_cells[$word][] = "\t\t" . '<td class="unglossed">***</td>' . "\n";
+					$transcription_class = ' class="unglossed"';
+				}
+				elseif( count( $morpheme_gloss ) > 1 )
+				{
+					// Multiple glosses
+					$gloss_cells[$word][] = "\t\t" . '<td class="multiple">' . htmlentities( implode( '/', $morpheme_gloss ), ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
+					$transcription_class = ' class="multiple"';
+				}
+				else
+				{
+					// Just one gloss
+					$gloss_cells[$word][] = "\t\t" . '<td>' . htmlentities( $morpheme_gloss[0], ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
+				}
+
+				$transcription_cells[$word][] = "\t\t" . '<td' . $transcription_class . '>' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
+			}
+
+			$transcription_row[] = implode( $morpheme_boundary, $transcription_cells[$word] );
+			$gloss_row[] = implode( $morpheme_boundary, $gloss_cells[$word] );
+		}
+
+		$transcription_row = implode( $word_boundary, $transcription_row );
+		$gloss_row = implode( $word_boundary, $gloss_row );
+
+		$table .= '<table class="gloss">' . "\n";
+		$table .= "\t" . '<tr class="transcription">' . "\n";
+		$table .= $transcription_row;
+		$table .= "\t" . '</tr>' . "\n";
+		$table .= "\t" . '<tr class="gloss">' . "\n";
+		$table .= $gloss_row;
+		$table .= "\t" . '</tr>' . "\n";
+		$table .= '</table>' . "\n";
+
+		return $table;
+	}
+
 	public function add_record()
 	{
 		global $Database, $Changes, $User;
@@ -370,7 +464,7 @@ class Records extends Base
 //						'content'	=>	$this->format_language( $row['language'] )
 					),
 					3	=>	array(
-						'content'	=>	'<span class="transcription"><span class="g-symbol">' . $g_symbol . '</span>' . $this->convert_newlines( htmlentities( $row['transcription'], ENT_QUOTES, 'UTF-8' ) ) . '</span><br /><span class="translation">' . $this->convert_newlines( htmlentities( $row['translation'], ENT_QUOTES, 'UTF-8' ) ) . '</span>'
+						'content'	=>	'<span class="g-symbol">' . $g_symbol . '</span>' . "\n" . $this->_generate_gloss_table( $row['transcription'] ) . '<br /><span class="translation">' . $this->convert_newlines( htmlentities( $row['translation'], ENT_QUOTES, 'UTF-8' ) ) . '</span>'
 					),
 					4	=>	array(
 						'content'	=>	$this->convert_newlines( htmlentities( $row['comments'], ENT_QUOTES, 'UTF-8' ) )
@@ -380,6 +474,8 @@ class Records extends Base
 					),
 				)
 			);
+
+			$gloss = $this->_generate_gloss_table( $row['transcription'] );
 		}
 
 		$Database->free_result( $result );

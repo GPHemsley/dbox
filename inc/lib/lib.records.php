@@ -176,6 +176,7 @@ class Records extends Base
 				'name'	=>	'grammaticality',
 				'label'	=>	'Grammaticality',
 				'data'	=>	array(
+					'checked'	=>	G_GOOD,
 					'values'	=>	array(
 						G_GOOD	=>	'Grammatical',
 //						G_OKAY	=>	'Okay',
@@ -310,7 +311,6 @@ class Records extends Base
 				'label'	=>	'Transcription',
 				'data'	=>	array(
 					'size'		=>	30,
-					'autofocus'	=>	TRUE,
 					'value'		=>	$record['transcription'],
 				)
 			),

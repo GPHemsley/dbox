@@ -211,7 +211,6 @@ class Dictionary extends Base
 				'label'	=>	'Morpheme',
 				'data'	=>	array(
 					'size'		=>	30,
-					'autofocus'	=>	TRUE,
 					'value'		=>	$entry['morpheme'],
 				)
 			),

@@ -33,6 +33,36 @@ class Records extends Base
 		return str_replace( '"', '""', $string );
 	}
 
+	private function _get_grammaticality_symbol( $value )
+	{
+		switch( $value )
+		{
+			case GR_VAL_BAD:
+				$g_symbol = GR_SYM_BAD;
+			break;
+
+			case GR_VAL_NOTSOBAD:
+				$g_symbol = GR_SYM_NOTSOBAD;
+			break;
+
+			case GR_VAL_MARGINAL:
+				$g_symbol = GR_SYM_MARGINAL;
+			break;
+
+			case GR_VAL_OKAY:
+				$g_symbol = GR_SYM_OKAY;
+			break;
+
+			case GR_VAL_GOOD:
+			default:
+				$g_symbol = GR_SYM_GOOD;
+			break;
+
+		}
+
+		return $g_symbol;
+	}
+
 	private function _parse_record( $record )
 	{
 		global $Database;
@@ -70,9 +100,11 @@ class Records extends Base
 		return $gloss;
 	}
 
-	private function _generate_gloss_table( $record )
+	private function _generate_gloss_table( $record, $grammaticality = GR_VAL_GOOD )
 	{
 		$gloss = $this->_parse_record( $record );
+
+		$g_symbol = $this->_get_grammaticality_symbol( $grammaticality );
 
 		$table = '';
 		$transcription_cells = $gloss_cells = array();
@@ -117,6 +149,7 @@ class Records extends Base
 
 		$table .= '<table class="gloss">' . "\n";
 		$table .= "\t" . '<tr class="transcription">' . "\n";
+		$table .= "\t\t" . '<td rowspan="2" class="g-symbol">' . $g_symbol . '</td>' . "\n";
 		$table .= $transcription_row;
 		$table .= "\t" . '</tr>' . "\n";
 		$table .= "\t" . '<tr class="gloss">' . "\n";
@@ -138,7 +171,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
+			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : GR_VAL_GOOD;
 
 //			else
 			{
@@ -176,13 +209,13 @@ class Records extends Base
 				'name'	=>	'grammaticality',
 				'label'	=>	'Grammaticality',
 				'data'	=>	array(
-					'checked'	=>	G_GOOD,
+					'checked'	=>	GR_VAL_GOOD,
 					'values'	=>	array(
-						G_GOOD	=>	'Grammatical',
-//						G_OKAY	=>	'Okay',
-						G_MARGINAL	=>	'Marginal',
-//						G_NOTSOBAD	=>	'Not so bad',
-						G_BAD	=>	'Ungrammatical',
+						GR_VAL_GOOD		=>	'Grammatical',
+//						GR_VAL_OKAY		=>	'Okay',
+						GR_VAL_MARGINAL	=>	'Marginal',
+//						GR_VAL_NOTSOBAD	=>	'Not so bad',
+						GR_VAL_BAD		=>	'Ungrammatical',
 					)
 				)
 			),
@@ -252,7 +285,7 @@ class Records extends Base
 			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
 			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : G_GOOD;
+			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : GR_VAL_GOOD;
 
 //			else
 			{
@@ -297,11 +330,11 @@ class Records extends Base
 				'data'	=>	array(
 					'checked'	=>	$record['grammaticality'],
 					'values'	=>	array(
-						G_GOOD	=>	'Grammatical',
-//						G_OKAY	=>	'Okay',
-						G_MARGINAL	=>	'Marginal',
-//						G_NOTSOBAD	=>	'Not so bad',
-						G_BAD	=>	'Ungrammatical',
+						GR_VAL_GOOD		=>	'Grammatical',
+//						GR_VAL_OKAY		=>	'Okay',
+						GR_VAL_MARGINAL	=>	'Marginal',
+//						GR_VAL_NOTSOBAD	=>	'Not so bad',
+						GR_VAL_BAD		=>	'Ungrammatical',
 					)
 				)
 			),
@@ -396,7 +429,7 @@ class Records extends Base
 			'content'	=>	'Transcriber'
 		);
 
-		$sql = 'SELECT r.*, u.name
+		$sql = 'SELECT r.*, u.name, u.email_address
 			FROM records r
 			LEFT JOIN ( users u )
 				ON ( r.creator_id = u.user_id )
@@ -420,32 +453,27 @@ class Records extends Base
 		{
 			switch( $row['grammaticality'] )
 			{
-				case G_BAD:
+				case GR_VAL_BAD:
 					$g_class = 'bad';
-					$g_symbol = '*';
 				break;
 
-				case G_NOTSOBAD:
+				case GR_VAL_NOTSOBAD:
 //					$g_class = 'notsobad';
 					$g_class = 'marginal';
-					$g_symbol = '*?';
 				break;
 
-				case G_MARGINAL:
+				case GR_VAL_MARGINAL:
 					$g_class = 'marginal';
-					$g_symbol = '%';
 				break;
 
-				case G_OKAY:
+				case GR_VAL_OKAY:
 //					$g_class = 'okay';
 					$g_class = 'marginal';
-					$g_symbol = '?';
 				break;
 
-				case G_GOOD:
+				case GR_VAL_GOOD:
 				default:
 					$g_class = 'good';
-					$g_symbol = '';
 				break;
 
 			}
@@ -464,18 +492,16 @@ class Records extends Base
 //						'content'	=>	$this->format_language( $row['language'] )
 					),
 					3	=>	array(
-						'content'	=>	'<span class="g-symbol">' . $g_symbol . '</span>' . "\n" . $this->_generate_gloss_table( $row['transcription'] ) . '<br /><span class="translation">' . $this->convert_newlines( htmlentities( $row['translation'], ENT_QUOTES, 'UTF-8' ) ) . '</span>'
+						'content'	=>	"\n" . $this->_generate_gloss_table( $row['transcription'], $row['grammaticality'] ) . '<br /><span class="translation">' . $this->convert_newlines( htmlentities( $row['translation'], ENT_QUOTES, 'UTF-8' ) ) . '</span>'
 					),
 					4	=>	array(
 						'content'	=>	$this->convert_newlines( htmlentities( $row['comments'], ENT_QUOTES, 'UTF-8' ) )
 					),
 					5	=>	array(
-						'content'	=>	'<span class="creator">' . $row['name'] . '</span><br /><span class="creation-time">' . $this->format_date( $row['creation_time'], 'F j, Y' ) . '</span>'
+						'content'	=>	'<a href="mailto:' . str_replace( '%40', '&#x0040;', rawurlencode( $row['email_address'] ) ) . '?subject=' . rawurlencode( '[dbox] Elicitation ' . $row['record_id'] . ': ' . $row['transcription'] ) . '" class="creator">' . htmlentities( $row['name'], ENT_QUOTES, 'UTF-8' ) . '</a><br /><span class="creation-time">' . $this->format_date( $row['creation_time'], 'F j, Y' ) . '</span>'
 					),
 				)
 			);
-
-			$gloss = $this->_generate_gloss_table( $row['transcription'] );
 		}
 
 		$Database->free_result( $result );

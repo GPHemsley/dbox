@@ -38,10 +38,16 @@ define( 'UT_ADMIN', 100 );
 /**
  * Grammaticality judgements
  */
-define( 'G_GOOD', 2 );		//
-define( 'G_OKAY', 1 );		// ?
-define( 'G_MARGINAL', 0 );	// %
-define( 'G_NOTSOBAD', -1 );	// *?
-define( 'G_BAD', -2 );		// *
+define( 'GR_VAL_GOOD', 2 );
+define( 'GR_VAL_OKAY', 1 );
+define( 'GR_VAL_MARGINAL', 0 );
+define( 'GR_VAL_NOTSOBAD', -1 );
+define( 'GR_VAL_BAD', -2 );
+
+define( 'GR_SYM_GOOD', '' );
+define( 'GR_SYM_OKAY', '?' );
+define( 'GR_SYM_MARGINAL', '%' );
+define( 'GR_SYM_NOTSOBAD', '*?' );
+define( 'GR_SYM_BAD', '*' );
 
 ?>

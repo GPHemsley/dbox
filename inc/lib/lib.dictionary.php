@@ -39,7 +39,7 @@ class Dictionary extends Base
 			$morpheme = ( exists( $_POST['morpheme'] ) ) ? $_POST['morpheme'] : NULL;
 			$gloss = ( exists( $_POST['gloss'] ) ) ? $_POST['gloss'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-//			$morpheme_type = ( isset( $_POST['morpheme_type'] ) ) ? (int) $_POST['morpheme_type'] : G_GOOD;
+//			$morpheme_type = ( isset( $_POST['morpheme_type'] ) ) ? (int) $_POST['morpheme_type'] : GR_VAL_GOOD;
 
 //			else
 			{
@@ -78,11 +78,11 @@ class Dictionary extends Base
 				'label'	=>	'Morpheme Type',
 				'data'	=>	array(
 					'values'	=>	array(
-						G_GOOD	=>	'Grammatical',
-//						G_OKAY	=>	'Okay',
-						G_MARGINAL	=>	'Marginal',
-//						G_NOTSOBAD	=>	'Not so bad',
-						G_BAD	=>	'Ungrammatical',
+						GR_VAL_GOOD	=>	'Grammatical',
+//						GR_VAL_OKAY	=>	'Okay',
+						GR_VAL_MARGINAL	=>	'Marginal',
+//						GR_VAL_NOTSOBAD	=>	'Not so bad',
+						GR_VAL_BAD	=>	'Ungrammatical',
 					)
 				)
 			),*/
@@ -152,7 +152,7 @@ class Dictionary extends Base
 			$morpheme = ( exists( $_POST['morpheme'] ) ) ? $_POST['morpheme'] : NULL;
 			$gloss = ( exists( $_POST['gloss'] ) ) ? $_POST['gloss'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
-//			$morpheme_type = ( isset( $_POST['morpheme_type'] ) ) ? (int) $_POST['morpheme_type'] : G_GOOD;
+//			$morpheme_type = ( isset( $_POST['morpheme_type'] ) ) ? (int) $_POST['morpheme_type'] : GR_VAL_GOOD;
 
 //			else
 			{
@@ -197,11 +197,11 @@ class Dictionary extends Base
 				'data'	=>	array(
 					'checked'	=>	$entry['morpheme_type'],
 					'values'	=>	array(
-						G_GOOD	=>	'Grammatical',
-//						G_OKAY	=>	'Okay',
-						G_MARGINAL	=>	'Marginal',
-//						G_NOTSOBAD	=>	'Not so bad',
-						G_BAD	=>	'Ungrammatical',
+						GR_VAL_GOOD	=>	'Grammatical',
+//						GR_VAL_OKAY	=>	'Okay',
+						GR_VAL_MARGINAL	=>	'Marginal',
+//						GR_VAL_NOTSOBAD	=>	'Not so bad',
+						GR_VAL_BAD	=>	'Ungrammatical',
 					)
 				)
 			),*/

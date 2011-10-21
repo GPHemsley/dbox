@@ -458,6 +458,10 @@ table.gloss th, table.gloss td {
 	text-align: center !important;
 }
 
+.unglossed a {
+	color: inherit !important;
+}
+
 .multiple {
 	font-weight: stronger;
 	color: #000080;

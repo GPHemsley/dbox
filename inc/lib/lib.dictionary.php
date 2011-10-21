@@ -34,9 +34,10 @@ class Dictionary extends Base
 
 		$submit = ( exists( $_POST['submit'] ) ) ? TRUE : FALSE;
 
+		$morpheme = ( exists( $_REQUEST['morpheme'] ) ) ? $_REQUEST['morpheme'] : NULL;
+
 		if( $submit )
 		{
-			$morpheme = ( exists( $_POST['morpheme'] ) ) ? $_POST['morpheme'] : NULL;
 			$gloss = ( exists( $_POST['gloss'] ) ) ? $_POST['gloss'] : NULL;
 			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
 //			$morpheme_type = ( isset( $_POST['morpheme_type'] ) ) ? (int) $_POST['morpheme_type'] : GR_VAL_GOOD;
@@ -92,7 +93,8 @@ class Dictionary extends Base
 				'label'	=>	'Morpheme',
 				'data'	=>	array(
 					'size'		=>	30,
-					'autofocus'	=>	TRUE,
+					'autofocus'	=>	( ( !empty( $morpheme ) ) ? FALSE : TRUE ),
+					'value'		=>	$morpheme,
 				)
 			),
 			array(
@@ -100,7 +102,8 @@ class Dictionary extends Base
 				'name'	=>	'gloss',
 				'label'	=>	'Gloss',
 				'data'	=>	array(
-					'size'	=>	30,
+					'size'		=>	30,
+					'autofocus'	=>	( ( !empty( $morpheme ) ) ? TRUE : FALSE ),
 				)
 			),
 			array(

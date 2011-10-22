@@ -144,7 +144,7 @@ class User
 	function register_user( $name, $email_address, $passphrase, $passphrase_confirm )
 	{
 		global $dbox;
-		global $Database;
+		global $Database, $Changes;
 
 		$error = FALSE;
 
@@ -191,6 +191,14 @@ class User
 
 		if( $result = $Database->query( $sql ) )
 		{
+			$new_user_id = $Database->insert_id();
+			$new_user_info = array(
+				'name'			=>	$name,
+				'email_address'	=>	$email_address,
+			);
+
+			$Changes->track_change( 'user_register', $new_user_id, $new_user_id, serialize( $new_user_info ) );
+
 			return TRUE;
 		}
 		else

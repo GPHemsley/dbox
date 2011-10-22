@@ -435,7 +435,7 @@ class Records extends Base
 			FROM records r
 			LEFT JOIN ( users u )
 				ON ( r.creator_id = u.user_id )
-			ORDER BY u.user_id ASC, r.creation_time ASC'; // TODO: Remove this once tags are implemented.
+			ORDER BY u.name ASC, r.creation_time ASC'; // TODO: Remove this once tags are implemented.
 
 		$result = $Database->query( $sql );
 

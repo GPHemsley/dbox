@@ -143,7 +143,8 @@ class User
 	 */
 	function register_user( $name, $email_address, $passphrase, $passphrase_confirm )
 	{
-		global $dbox, $Database;
+		global $dbox;
+		global $Database;
 
 		$error = FALSE;
 

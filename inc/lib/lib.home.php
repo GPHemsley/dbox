@@ -21,9 +21,6 @@ class Home extends Base
 {
 	function __construct()
 	{
-		global $Changes, $User;
-
-		$Changes->track_change( 'test_home', $User->user_info['id'], -1, 'Test', NULL );
 	}
 }
 

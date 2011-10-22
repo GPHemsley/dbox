@@ -35,6 +35,11 @@ define( 'UT_STUDENT', 0 );
 define( 'UT_INSTRUCTOR', 10 );
 define( 'UT_ADMIN', 100 );
 
+/***
+ * Changes
+ */
+define( 'NO_ITEM_ID', 0 );
+
 /**
  * Grammaticality judgements
  */

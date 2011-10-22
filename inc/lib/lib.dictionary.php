@@ -34,12 +34,12 @@ class Dictionary extends Base
 
 		$submit = ( exists( $_POST['submit'] ) ) ? TRUE : FALSE;
 
-		$morpheme = ( exists( $_REQUEST['morpheme'] ) ) ? $_REQUEST['morpheme'] : NULL;
+		$morpheme = ( exists( $_REQUEST['morpheme'] ) ) ? trim( $_REQUEST['morpheme'] ) : NULL;
 
 		if( $submit )
 		{
-			$gloss = ( exists( $_POST['gloss'] ) ) ? $_POST['gloss'] : NULL;
-			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
+			$gloss = ( exists( $_POST['gloss'] ) ) ? trim( $_POST['gloss'] ) : NULL;
+			$comments = ( exists( $_POST['comments'] ) ) ? trim( $_POST['comments'] ) : NULL;
 //			$morpheme_type = ( isset( $_POST['morpheme_type'] ) ) ? (int) $_POST['morpheme_type'] : GR_VAL_GOOD;
 
 //			else
@@ -152,9 +152,9 @@ class Dictionary extends Base
 
 		if( $submit )
 		{
-			$morpheme = ( exists( $_POST['morpheme'] ) ) ? $_POST['morpheme'] : NULL;
-			$gloss = ( exists( $_POST['gloss'] ) ) ? $_POST['gloss'] : NULL;
-			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
+			$morpheme = ( exists( $_POST['morpheme'] ) ) ? trim( $_POST['morpheme'] ) : NULL;
+			$gloss = ( exists( $_POST['gloss'] ) ) ? trim( $_POST['gloss'] ) : NULL;
+			$comments = ( exists( $_POST['comments'] ) ) ? trim( $_POST['comments'] ) : NULL;
 //			$morpheme_type = ( isset( $_POST['morpheme_type'] ) ) ? (int) $_POST['morpheme_type'] : GR_VAL_GOOD;
 
 //			else
@@ -293,7 +293,8 @@ class Dictionary extends Base
 		);
 
 		$sql = 'SELECT d.*
-			FROM dictionary d';
+			FROM dictionary d
+			ORDER BY d.morpheme ASC, d.parent_morpheme ASC, d.gloss ASC'; // TODO: Change this once better morpheme relationship tracking is implemented.
 
 		$result = $Database->query( $sql );
 

@@ -340,7 +340,8 @@ class Sessions
 	 */
 	public function log_in( $email_address, $passphrase, $secure )
 	{
-		global $Database, $dbox;
+		global $dbox;
+		global $Database, $Changes;
 
 		$sql = "SELECT user_id, email_address, passphrase
 			FROM users
@@ -363,6 +364,8 @@ class Sessions
 				// The current user's session must be updated to match their new user ID.
 				if( $this->update_session( $this->get_session(), (int) $row['user_id'], (bool) $secure ) )
 				{
+					$Changes->track_change( 'user_login', $this->user_id, NO_ITEM_ID );
+
 					$this->logged_in = TRUE;
 				}
 			}
@@ -383,9 +386,15 @@ class Sessions
 	 */
 	public function log_out()
 	{
+		global $Changes;
+
+		$old_user_id = $this->user_id;
+
 		// Reset current session to belong to an anonymous user.
 		if( $this->update_session( $this->get_session(), USER_ANONYMOUS ) )
 		{
+			$Changes->track_change( 'user_logout', $old_user_id, NO_ITEM_ID );
+
 			$this->logged_in = FALSE;
 			$this->user_id = USER_ANONYMOUS;
 

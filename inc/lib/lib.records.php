@@ -170,9 +170,9 @@ class Records extends Base
 
 		if( $submit )
 		{
-			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
-			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
-			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
+			$transcription = ( exists( $_POST['transcription'] ) ) ? trim( $_POST['transcription'] ) : NULL;
+			$translation = ( exists( $_POST['translation'] ) ) ? trim( $_POST['translation'] ) : NULL;
+			$comments = ( exists( $_POST['comments'] ) ) ? trim( $_POST['comments'] ) : NULL;
 			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : GR_VAL_GOOD;
 
 //			else
@@ -284,9 +284,9 @@ class Records extends Base
 
 		if( $submit )
 		{
-			$transcription = ( exists( $_POST['transcription'] ) ) ? $_POST['transcription'] : NULL;
-			$translation = ( exists( $_POST['translation'] ) ) ? $_POST['translation'] : NULL;
-			$comments = ( exists( $_POST['comments'] ) ) ? $_POST['comments'] : NULL;
+			$transcription = ( exists( $_POST['transcription'] ) ) ? trim( $_POST['transcription'] ) : NULL;
+			$translation = ( exists( $_POST['translation'] ) ) ? trim( $_POST['translation'] ) : NULL;
+			$comments = ( exists( $_POST['comments'] ) ) ? trim( $_POST['comments'] ) : NULL;
 			$grammaticality = ( isset( $_POST['grammaticality'] ) ) ? (int) $_POST['grammaticality'] : GR_VAL_GOOD;
 
 //			else
@@ -435,7 +435,7 @@ class Records extends Base
 			FROM records r
 			LEFT JOIN ( users u )
 				ON ( r.creator_id = u.user_id )
-			ORDER BY r.creation_time ASC';
+			ORDER BY u.user_id ASC, r.creation_time ASC'; // TODO: Remove this once tags are implemented.
 
 		$result = $Database->query( $sql );
 

@@ -37,18 +37,19 @@ class Changes
 	 * @param $change_type string Change type
 	 * @param $user_id int User ID
 	 * @param $item_id int Item ID
-	 * @param $new_value string New or only value
+	 * @param $new_value string New or only value [default: NULL]
 	 * @param $old_value (string|null) Old value [default: NULL]
 	 * @return boolean Success of tracking change
 	 */
-	function track_change( $change_type, $user_id, $item_id, $new_value, $old_value = NULL )
+	function track_change( $change_type, $user_id, $item_id, $new_value = NULL, $old_value = NULL )
 	{
 		global $Database;
 
+		$new_value = ( $new_value === NULL ) ? 'NULL' : "'" . $Database->escape( $new_value ) . "'";
 		$old_value = ( $old_value === NULL ) ? 'NULL' : "'" . $Database->escape( $old_value ) . "'";
 
 		$sql = "INSERT INTO changes ( change_type, user_id, item_id, new_value, old_value, timestamp )
-			VALUES ( '" . $Database->escape( $change_type ) . "', " . $Database->escape( $user_id ) . ", " . $Database->escape( $item_id ) . ", '" . $Database->escape( $new_value ) . "', $old_value, " . time() . " )";
+			VALUES ( '" . $Database->escape( $change_type ) . "', " . $Database->escape( $user_id ) . ", " . $Database->escape( $item_id ) . ", $new_value, $old_value, " . time() . " )";
 
 		if( $result = $Database->query( $sql ) )
 		{

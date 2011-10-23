@@ -458,7 +458,7 @@ table.gloss th, table.gloss td {
 	text-align: center !important;
 }
 
-.unglossed a {
+table.gloss a {
 	color: inherit !important;
 }
 

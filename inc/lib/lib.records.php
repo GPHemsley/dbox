@@ -117,15 +117,13 @@ class Records extends Base
 		{
 			foreach( $morphemes as $morpheme => $morpheme_gloss )
 			{
-				$transcription_class = $transcription_prefix = $transcription_suffix = '';
+				$transcription_class = '';
 
 				if( count( $morpheme_gloss ) < 1 )
 				{
 					// No gloss
-					$gloss_cells[$word][] = "\t\t" . '<td class="unglossed">***</td>' . "\n";
+					$gloss_cells[$word][] = "\t\t" . '<td class="unglossed"><a href="' . ROOT . 'dictionary.php?mode=add&amp;morpheme=' . $morpheme . '">***</a></td>' . "\n";
 					$transcription_class = ' class="unglossed"';
-					$transcription_prefix = '<a href="' . ROOT . 'dictionary.php?mode=add&amp;morpheme=' . $morpheme . '">';
-					$transcription_suffix = '</a>';
 				}
 				elseif( count( $morpheme_gloss ) > 1 )
 				{
@@ -139,7 +137,7 @@ class Records extends Base
 					$gloss_cells[$word][] = "\t\t" . '<td>' . htmlentities( $morpheme_gloss[0], ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
 				}
 
-				$transcription_cells[$word][] = "\t\t" . '<td' . $transcription_class . '>' . $transcription_prefix . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . $transcription_suffix . '</td>' . "\n";
+				$transcription_cells[$word][] = "\t\t" . '<td' . $transcription_class . '><a href="' . ROOT . 'records.php?mode=view&amp;morpheme=' . $morpheme . '">' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '</a></td>' . "\n";
 			}
 
 			$transcription_row[] = implode( $morpheme_boundary, $transcription_cells[$word] );

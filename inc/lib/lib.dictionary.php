@@ -325,7 +325,7 @@ class Dictionary extends Base
 //						'content'	=>	$this->format_language( $row['language'] )
 					),
 					3	=>	array(
-						'content'	=>	'<span class="transcription">' . $this->convert_newlines( htmlentities( $row['morpheme'], ENT_QUOTES, 'UTF-8' ) ) . '</span><br /><span class="gloss">' . $this->convert_newlines( htmlentities( $row['gloss'], ENT_QUOTES, 'UTF-8' ) ) . '</span>'
+						'content'	=>	'<span class="transcription"><a href="' . ROOT . 'records.php?mode=view&amp;morpheme=' . htmlentities( $row['morpheme'], ENT_QUOTES, 'UTF-8' ) . '">' . $this->convert_newlines( htmlentities( $row['morpheme'], ENT_QUOTES, 'UTF-8' ) ) . '</a></span><br /><span class="gloss">' . $this->convert_newlines( htmlentities( $row['gloss'], ENT_QUOTES, 'UTF-8' ) ) . '</span>'
 					),
 					4	=>	array(
 						'content'	=>	$this->convert_newlines( htmlentities( $row['comments'], ENT_QUOTES, 'UTF-8' ) )

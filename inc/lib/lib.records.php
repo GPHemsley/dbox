@@ -386,6 +386,9 @@ class Records extends Base
 
 		$columns = $headers = $rows = array();
 
+		$morpheme = ( exists( $_GET['morpheme'] ) ) ? trim( $_GET['morpheme'] ) : NULL;
+		$morpheme_where = ( !empty( $morpheme ) ) ? "WHERE r.transcription REGEXP '^(.*[[:space:]-])?" . $Database->escape( $morpheme ) . "([[:space:]-].*)?$'" : '';
+
 //		$language_where = ( $this->language ) ? "AND r.language = '{$this->language}'" : '';
 
 		$columns[0] = array(
@@ -435,6 +438,7 @@ class Records extends Base
 			FROM records r
 			LEFT JOIN ( users u )
 				ON ( r.creator_id = u.user_id )
+			' . $morpheme_where . '
 			ORDER BY u.name ASC, r.creation_time ASC'; // TODO: Remove this once tags are implemented.
 
 		$result = $Database->query( $sql );

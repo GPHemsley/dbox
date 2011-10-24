@@ -18,12 +18,34 @@
 
 >============================[ FUTURE RELEASES ]=============================<
 
-2011-XX-XX :: dbox 0.3
+2011-XX-XX :: dbox 0.4
 
-* Basic glossing support.
+* ???
 
 
 >============================[ CURRENT RELEASE ]=============================<
+
+2011-10-24 :: dbox 0.3
+
+* Added basic glossing support via the morpheme dictionary.
+** Morphemes in elicitations are automatically matched with existing
+   dictionary entries.
+** Unglossed morphemes are linked directly to the Add Morpheme interface.
+* Added filtering based on morphemes, to display only those elicitations that
+  contain the given morpheme.
+** Every morpheme in elicitations is linked to filter on that morpheme.
+** Every morpheme in the dictionary also links to a filter on that morpheme.
+* Changed elicitation sorting to sort by transcriber first.
+* Added print stylesheet for pretty printing.
+* Added e-mail link to the transcriber of each elicitation, for easy
+  communication.
+* Explicitly set the default grammaticality judgement of an elicitation.
+* Prevent extraneous whitespace in elicitations, morphemes, and glosses.
+* Remove autofocus from edit pages, to prevent undesired data loss.
+* User registration, login, and logout are now tracked properly.
+
+
+>=============================[ PAST RELEASES ]==============================<
 
 2011-10-17 :: dbox 0.2
 
@@ -36,8 +58,6 @@
 * Changed formatting of page header in an attempt to clarify what are and are
   not links.
 
-
->=============================[ PAST RELEASES ]==============================<
 
 2011-10-10 :: dbox 0.1.1
 

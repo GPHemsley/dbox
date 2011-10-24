@@ -1,0 +1,181 @@
+@page {
+	size: landscape;
+}
+
+* {
+	background-color: transparent;
+	color: black;
+}
+
+body {
+	font-family: Paltino, Georgia, serif;
+	font-size: 12pt;
+}
+
+a {
+	text-decoration: none;
+}
+
+img, embed {
+	border: none;
+}
+
+h1 {
+	font-size: 150%; /* 18pt; */
+}
+
+h2 {
+	font-size: 133.333%; /* 16pt; */
+}
+
+h3 {
+	font-size: 116.667%; /* 14pt;*/
+}
+
+h4 {
+	font-size: 100%; /* 12pt; */
+	font-weight: bolder;
+	text-decoration: underline;
+}
+
+h5 {
+	font-size: 91.667%; /* 11pt; */
+}
+
+h6 {
+	font-size: 83.333%; /* 10pt; */
+}
+
+header, footer {
+	margin: auto;
+	text-align: center;
+}
+
+header h1, header p, footer p {
+	margin: 0em auto;
+}
+
+footer {
+	margin-top: 1em;
+	font-size: 9pt;
+}
+
+#user-links, #navigation, #sub-nav {
+	display: none;
+}
+
+table {
+	padding: 0em;
+	border: 1pt solid black;
+	border-collapse: collapse;
+}
+
+form {
+	padding: 1em;
+	border: 3pt double black;
+}
+
+form h1, form h2, form h3, form h4, form h5, form h6 {
+	margin: 0em;
+}
+
+input[type="text"], input[type="password"] {
+	font-size: 200%;
+}
+
+input[type="submit"], textarea {
+	font-size: 125%;
+}
+
+textarea {
+	font-family: inherit;
+}
+
+span.checkbox {
+	padding: 0em 0.5em 0em 0em;
+}
+
+/**
+* Table list styling
+*/
+table.list {
+	clear: both;
+	width: 100%;
+	margin: 1em auto;
+	padding: 0.25em;
+	text-align: center;
+}
+
+table.list thead, table.list tfoot {
+	border: 1pt solid black;
+}
+
+table.list th, table.list td {
+	text-align: center;
+	margin: auto;
+	border: 1pt solid black;
+	padding: 0.25em;
+}
+
+th.edit, td.edit {
+	visibility: hidden;
+}
+
+/**
+ * Records
+ */
+table.gloss {
+	display: inline-block;
+	margin: 0em auto;
+	border: 0pt;
+	padding: 0em;
+}
+
+table.gloss th, table.gloss td {
+	margin: 0em;
+	border: 0pt;
+	padding: 0em;
+	text-align: left;
+}
+
+.transcription {
+	font-size: larger;
+}
+
+.transcription .g-symbol {
+	font-size: smaller;
+	vertical-align: super;
+}
+
+.unglossed {
+	font-style: italic;
+	text-align: center !important;
+}
+
+table.gloss a {
+	color: inherit !important;
+}
+
+.multiple {
+	font-weight: bolder;
+}
+
+.translation::before {
+	content: '\2018';
+}
+
+.translation::after {
+	content: '\2019';
+}
+
+.translation {
+
+}
+
+.creator {
+
+}
+
+.creation-time {
+	font-size: smaller;
+}

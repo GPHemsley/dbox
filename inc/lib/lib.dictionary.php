@@ -259,7 +259,9 @@ class Dictionary extends Base
 		$columns[0] = array(
 			'style'	=>	'width: 5%; border-right: 2px solid black;'
 		);
-		$headers[0] = array();
+		$headers[0] = array(
+			'class'	=>	'edit'
+		);
 
 		$columns[1] = array(
 			'style'	=>	'width: 5%;'

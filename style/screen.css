@@ -157,14 +157,6 @@ table {
 	border-collapse: collapse;
 }
 
-table.list {
-	clear: both;
-	width: 100%;
-	margin: 1em auto;
-	padding: 0.25em;
-	text-align: center;
-}
-
 form {
 	padding: 1em;
 	border: 3px double black;
@@ -357,6 +349,14 @@ span.checkbox {
 /**
 * Table list styling
 */
+table.list {
+	clear: both;
+	width: 100%;
+	margin: 1em auto;
+	padding: 0.25em;
+	text-align: center;
+}
+
 table.list th {
 	background-color: #8F8F8F;
 	color: black;
@@ -453,7 +453,6 @@ table.gloss th, table.gloss td {
 }
 
 .unglossed {
-	font-weight: stronger;
 	color: #800000;
 	text-align: center !important;
 }
@@ -463,7 +462,6 @@ table.gloss a {
 }
 
 .multiple {
-	font-weight: stronger;
 	color: #000080;
 }
 

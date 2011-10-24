@@ -49,12 +49,13 @@ switch( $tab )
 	<title>dbox :: <?php print implode( ' :: ', $page_title ); ?></title>
 
 	<link rel="stylesheet" type="text/css" href="<?php print ROOT; ?>style/screen.css" media="screen" />
+	<link rel="stylesheet" type="text/css" href="<?php print ROOT; ?>style/print.css" media="print" />
 
 	<link rel="icon" type="image/png" href="<?php print ROOT; ?>style/images/box_logo.png" />
 </head>
 <body>
 
-<div id="header">
+<header id="header">
 	<!--div id="logo">
 		<a href="<?php print ROOT; ?>index.php"><img src="<?php print ROOT; ?>style/images/box_logo.png" alt="" width="75" height="75" /></a>
 	</div-->
@@ -83,15 +84,15 @@ else
 
 ?>
 	</div>
-</div>
+</header>
 
-<div id="navigation">
+<nav id="navigation">
 	<ul>
 		<li<?php print $tab_home; ?>><a href="<?php print ROOT; ?>index.php">Home</a></li>
 		<li<?php print $tab_records; ?>><a href="<?php print ROOT; ?>records.php">Elicitations</a></li>
 		<li<?php print $tab_dictionary; ?>><a href="<?php print ROOT; ?>dictionary.php">Dictionary</a></li>
 	</ul>
-</div>
+</nav>
 
 <div id="breadcrumbs">
 	<p><?php print implode( ' &rarr; ', $page_title ); ?></p>

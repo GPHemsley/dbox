@@ -378,13 +378,13 @@ class Records extends Base
 		Forms::create_form( 'edit-record', ROOT . 'records.php?mode=edit&amp;record_id=' . $record_id, $form_data );
 	}
 
-	public function view_records()
+	public function view_records( $morpheme = NULL )
 	{
 		global $Database, $User;
 
 		$columns = $headers = $rows = array();
 
-		$morpheme = ( exists( $_GET['morpheme'] ) ) ? trim( $_GET['morpheme'] ) : NULL;
+		$morpheme = ( !empty( $morpheme ) ) ? $morpheme : ( ( exists( $_REQUEST['morpheme'] ) ) ? trim( $_REQUEST['morpheme'] ) : NULL );
 		$morpheme_where = ( !empty( $morpheme ) ) ? "WHERE r.transcription REGEXP '^(.*[[:space:]-])?" . $Database->escape( $morpheme ) . "([[:space:]-].*)?$'" : '';
 
 //		$language_where = ( $this->language ) ? "AND r.language = '{$this->language}'" : '';
@@ -392,7 +392,9 @@ class Records extends Base
 		$columns[0] = array(
 			'style'	=>	'width: 5%; border-right: 2px solid black;'
 		);
-		$headers[0] = array();
+		$headers[0] = array(
+			'class'	=>	'edit'
+		);
 
 		$columns[1] = array(
 			'style'	=>	'width: 5%;'

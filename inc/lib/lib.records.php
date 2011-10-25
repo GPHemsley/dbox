@@ -71,11 +71,17 @@ class Records extends Base
 
 		foreach( explode( ' ', $record ) as $word_id => $word )
 		{
-			$gloss[$word] = array();
+			$gloss[$word_id] = array(
+				'word'		=>	$word,
+				'morphemes'	=>	array(),
+			);
 
 			foreach( explode( '-', $word ) as $morpheme_id => $morpheme )
 			{
-				$gloss[$word][$morpheme] = array();
+				$gloss[$word_id]['morphemes'][$morpheme_id] = array(
+					'morpheme'	=>	$morpheme,
+					'glosses'	=>	array(),
+				);
 
 				$sql = "SELECT d.*
 					FROM dictionary d
@@ -90,7 +96,7 @@ class Records extends Base
 
 				while( $row = $Database->fetch_assoc( $result ) )
 				{
-					$gloss[$word][$morpheme][] = $row['gloss'];
+					$gloss[$word_id]['morphemes'][$morpheme_id]['glosses'][] = $row['gloss'];
 				}
 
 				$Database->free_result( $result );
@@ -113,35 +119,38 @@ class Records extends Base
 		$word_boundary = "\t\t" . '<td class="boundary-word">&nbsp;</td>' . "\n";
 		$morpheme_boundary = "\t\t" . '<td class="boundary-morpheme">-</td>' . "\n";
 
-		foreach( $gloss as $word => $morphemes )
+		foreach( $gloss as $word_id => $word_data )
 		{
-			foreach( $morphemes as $morpheme => $morpheme_gloss )
+			foreach( $word_data['morphemes'] as $morpheme_id => $morpheme_data )
 			{
+				$morpheme = $morpheme_data['morpheme'];
+				$morpheme_gloss = $morpheme_data['glosses'];
+
 				$transcription_class = '';
 
 				if( count( $morpheme_gloss ) < 1 )
 				{
 					// No gloss
-					$gloss_cells[$word][] = "\t\t" . '<td class="unglossed"><a href="' . ROOT . 'dictionary.php?mode=add&amp;morpheme=' . $morpheme . '">***</a></td>' . "\n";
+					$gloss_cells[$word_id][] = "\t\t" . '<td class="unglossed"><a href="' . ROOT . 'dictionary.php?mode=add&amp;morpheme=' . $morpheme . '">***</a></td>' . "\n";
 					$transcription_class = ' class="unglossed"';
 				}
 				elseif( count( $morpheme_gloss ) > 1 )
 				{
 					// Multiple glosses
-					$gloss_cells[$word][] = "\t\t" . '<td class="multiple">' . htmlentities( implode( '/', $morpheme_gloss ), ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
+					$gloss_cells[$word_id][] = "\t\t" . '<td class="multiple">' . htmlentities( implode( '/', $morpheme_gloss ), ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
 					$transcription_class = ' class="multiple"';
 				}
 				else
 				{
 					// Just one gloss
-					$gloss_cells[$word][] = "\t\t" . '<td>' . htmlentities( $morpheme_gloss[0], ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
+					$gloss_cells[$word_id][] = "\t\t" . '<td>' . htmlentities( $morpheme_gloss[0], ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
 				}
 
-				$transcription_cells[$word][] = "\t\t" . '<td' . $transcription_class . '><a href="' . ROOT . 'records.php?mode=view&amp;morpheme=' . $morpheme . '">' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '</a></td>' . "\n";
+				$transcription_cells[$word_id][] = "\t\t" . '<td' . $transcription_class . '><a href="' . ROOT . 'records.php?mode=view&amp;morpheme=' . $morpheme . '">' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '</a></td>' . "\n";
 			}
 
-			$transcription_row[] = implode( $morpheme_boundary, $transcription_cells[$word] );
-			$gloss_row[] = implode( $morpheme_boundary, $gloss_cells[$word] );
+			$transcription_row[] = implode( $morpheme_boundary, $transcription_cells[$word_id] );
+			$gloss_row[] = implode( $morpheme_boundary, $gloss_cells[$word_id] );
 		}
 
 		$transcription_row = implode( $word_boundary, $transcription_row );

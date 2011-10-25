@@ -7,8 +7,15 @@
 	color: black;
 }
 
+/**
+ * Ensure at least basic support for HTML5 elements
+ */
+header, hgroup, nav, section, article, aside, dialog, footer {
+	display: block;
+}
+
 body {
-	font-family: Paltino, Georgia, serif;
+	font-family: Palatino, Georgia, serif;
 	font-size: 12pt;
 }
 

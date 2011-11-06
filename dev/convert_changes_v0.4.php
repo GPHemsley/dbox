@@ -13,7 +13,7 @@
 /**
  * Change this to TRUE to use the tool.
  */
-define( 'DEV_TOOL_ON', TRUE );
+define( 'DEV_TOOL_ON', FALSE );
 
 /**
  * Define the path to the root directory, relative to this file.

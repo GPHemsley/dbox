@@ -197,7 +197,7 @@ class User
 				'email_address'	=>	$email_address,
 			);
 
-			$Changes->track_change( 'user_register', $new_user_id, $new_user_id, serialize( $new_user_info ) );
+			$Changes->track_change( $new_user_id, 'user', $new_user_id, 'register', serialize( $new_user_info ) );
 
 			return TRUE;
 		}

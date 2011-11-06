@@ -24,8 +24,6 @@ class Records extends Base
 		global $Changes, $User;
 
 		parent::__construct();
-
-//		$Changes->track_change( 'test_records', $User->user_info['id'], -1, 'Test', NULL );
 	}*/
 
 	private function _csv_escape( $string )
@@ -198,7 +196,7 @@ class Records extends Base
 						'grammaticality'	=>	$grammaticality,
 					);
 
-					$Changes->track_change( 'add_record', $User->user_info['id'], $Database->insert_id(), serialize( $new_value ) );
+					$Changes->track_change( $User->user_info['id'], 'record', $Database->insert_id(), 'add', serialize( $new_value ) );
 
 					print_message( 'good', 'Record for &quot;' . htmlentities( $transcription, ENT_QUOTES, 'UTF-8' ) . '&quot; added successfully.', 'Addition succeeded.' );
 				}
@@ -313,7 +311,7 @@ class Records extends Base
 						'grammaticality'	=>	$grammaticality,
 					);
 
-					$Changes->track_change( 'edit_record', $User->user_info['id'], $record_id, serialize( $new_value ), serialize( $record ) );
+					$Changes->track_change( $User->user_info['id'], 'record', $record_id, 'edit', serialize( $new_value ), serialize( $record ) );
 
 					print_message( 'good', 'Record for &quot;' . htmlentities( $transcription, ENT_QUOTES, 'UTF-8' ) . '&quot; update successfully.', 'Update succeeded.' );
 

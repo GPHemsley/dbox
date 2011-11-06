@@ -364,7 +364,7 @@ class Sessions
 				// The current user's session must be updated to match their new user ID.
 				if( $this->update_session( $this->get_session(), (int) $row['user_id'], (bool) $secure ) )
 				{
-					$Changes->track_change( 'user_login', $this->user_id, NO_ITEM_ID );
+					$Changes->track_change( $this->user_id, 'user', $this->user_id, 'login' );
 
 					$this->logged_in = TRUE;
 				}
@@ -393,7 +393,7 @@ class Sessions
 		// Reset current session to belong to an anonymous user.
 		if( $this->update_session( $this->get_session(), USER_ANONYMOUS ) )
 		{
-			$Changes->track_change( 'user_logout', $old_user_id, NO_ITEM_ID );
+			$Changes->track_change( $old_user_id, 'user', $old_user_id, 'logout' );
 
 			$this->logged_in = FALSE;
 			$this->user_id = USER_ANONYMOUS;

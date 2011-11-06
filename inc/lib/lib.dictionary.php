@@ -24,8 +24,6 @@ class Dictionary extends Base
 		global $Changes, $User;
 
 		parent::__construct();
-
-//		$Changes->track_change( 'test_dictionary', $User->user_info['id'], -1, NULL, NULL );
 	}*/
 
 	public function add_morpheme()
@@ -59,7 +57,7 @@ class Dictionary extends Base
 //						'morpheme_type'	=>	$morpheme_type,
 					);
 
-					$Changes->track_change( 'add_morpheme', $User->user_info['id'], $Database->insert_id(), serialize( $new_value ) );
+					$Changes->track_change( $User->user_info['id'], 'morpheme', $Database->insert_id(), 'add', serialize( $new_value ) );
 
 					print_message( 'good', 'Morpheme &quot;' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '&quot; added successfully.', 'Addition succeeded.' );
 				}
@@ -175,7 +173,7 @@ class Dictionary extends Base
 //						'morpheme_type'	=>	$morpheme_type,
 					);
 
-					$Changes->track_change( 'edit_morpheme', $User->user_info['id'], $morpheme_id, serialize( $new_value ), serialize( $entry ) );
+					$Changes->track_change( $User->user_info['id'], 'morpheme', $morpheme_id, 'edit', serialize( $new_value ), serialize( $entry ) );
 
 					print_message( 'good', 'Morpheme &quot;' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '&quot; update successfully.', 'Update succeeded.' );
 

@@ -34,22 +34,26 @@ class Changes
 	 *
 	 * Track a single change.
 	 *
-	 * @param $change_type string Change type
 	 * @param $user_id int User ID
+	 * @param $item_type string Item type
 	 * @param $item_id int Item ID
-	 * @param $new_value string New or only value [default: NULL]
+	 * @param $change_type string Change type
+	 * @param $new_value (string|null) New or only value [default: NULL]
 	 * @param $old_value (string|null) Old value [default: NULL]
 	 * @return boolean Success of tracking change
 	 */
-	function track_change( $change_type, $user_id, $item_id, $new_value = NULL, $old_value = NULL )
+	function track_change( $user_id, $item_type, $item_id, $change_type, $new_value = NULL, $old_value = NULL )
 	{
 		global $Database;
 
-		$new_value = ( $new_value === NULL ) ? 'NULL' : "'" . $Database->escape( $new_value ) . "'";
-		$old_value = ( $old_value === NULL ) ? 'NULL' : "'" . $Database->escape( $old_value ) . "'";
+		$user_id = (int) $user_id;
+		$item_id = (int) $item_id;
 
-		$sql = "INSERT INTO changes ( change_type, user_id, item_id, new_value, old_value, timestamp )
-			VALUES ( '" . $Database->escape( $change_type ) . "', " . $Database->escape( $user_id ) . ", " . $Database->escape( $item_id ) . ", $new_value, $old_value, " . time() . " )";
+		$old_value = ( $old_value === NULL ) ? 'NULL' : "'" . $Database->escape( $old_value ) . "'";
+		$new_value = ( $new_value === NULL ) ? 'NULL' : "'" . $Database->escape( $new_value ) . "'";
+
+		$sql = 'INSERT INTO changes ( timestamp, user_id, item_type, item_id, change_type, old_value, new_value )
+			VALUES ( ' . time() . ", $user_id, '" . $Database->escape( $item_type ) . "', $item_id, '" . $Database->escape( $change_type ) . "', $old_value, $new_value )";
 
 		if( $result = $Database->query( $sql ) )
 		{

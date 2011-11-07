@@ -247,6 +247,102 @@ class Dictionary extends Base
 		Forms::create_form( 'edit-morpheme', ROOT . 'dictionary.php?mode=edit&amp;morpheme_id=' . $morpheme_id, $form_data );
 	}
 
+	public function delete_morpheme( $morpheme_id )
+	{
+		global $Database, $Changes, $User;
+
+		if( !$morpheme_id )
+		{
+			print_message( 'bad', 'Please specify which morpheme you want to delete.', 'Morpheme ID not specified.' );
+
+			return FALSE;
+		}
+
+		$morpheme_id = (int) $morpheme_id;
+
+		$sql = 'SELECT d.*
+			FROM dictionary d
+			WHERE d.morpheme_id = ' . $morpheme_id;
+
+		$result = $Database->query( $sql );
+		$entry = $Database->fetch_assoc( $result );
+		$Database->free_result( $result );
+
+		if( empty( $entry ) )
+		{
+			print_message( 'bad', 'There is no morpheme matching that ID.', 'Unknown Morpheme ID.' );
+
+			$this->view_dictionary();
+
+			return;
+		}
+
+		$submit = ( exists( $_POST['submit'] ) ) ? TRUE : FALSE;
+
+		if( $submit )
+		{
+			$confirm = ( isset( $_POST['delete_morpheme_confirm'] ) ) ? (bool) $_POST['delete_morpheme_confirm'] : FALSE;
+
+			if( $confirm )
+			{
+				$sql = 'DELETE FROM dictionary
+					WHERE morpheme_id = ' . $morpheme_id;
+
+				$result = $Database->query( $sql );
+
+				if( $result )
+				{
+					$Changes->track_change( $User->user_info['id'], 'morpheme', $morpheme_id, 'delete', NULL, serialize( $entry ) );
+
+					print_message( 'good', 'Morpheme &quot;' . htmlentities( $entry['morpheme'], ENT_QUOTES, 'UTF-8' ) . '&quot; deleted successfully.', 'Deletion succeeded.' );
+
+					$this->view_dictionary();
+
+					return;
+				}
+			}
+			else
+			{
+				print_message( 'bad', 'Morpheme &quot;' . htmlentities( $entry['morpheme'], ENT_QUOTES, 'UTF-8' ) . '&quot; not deleted.', 'Deletion aborted.' );
+
+				$this->view_dictionary();
+
+				return;
+			}
+		}
+
+		$form_data = array(
+			array(
+				'type'	=>	'header',
+				'label'	=>	'Delete Morpheme',
+				'data'	=>	array(
+					'level'	=>	2,
+				)
+			),
+			array(
+				'type'	=>	'radio',
+				'name'	=>	'delete_morpheme_confirm',
+				'label'	=>	'Are you sure you want to delete the dictionary entry for "' . htmlentities( $entry['morpheme'], ENT_QUOTES, 'UTF-8' ) . '"?',
+				'data'	=>	array(
+					'checked'	=>	NO,
+					'values'	=>	array(
+						YES	=>	'Yes',
+						NO	=>	'No'
+					)
+				)
+			),
+			array(
+				'type'	=>	'submit',
+				'name'	=>	'submit',
+				'data'	=>	array(
+					'value'	=>	'Submit'
+				)
+			)
+		);
+
+		Forms::create_form( 'delete-morpheme', ROOT . 'dictionary.php?mode=delete&amp;morpheme_id=' . $morpheme_id, $form_data );
+	}
+
 	public function view_dictionary()
 	{
 		global $Database, $User;
@@ -317,7 +413,7 @@ class Dictionary extends Base
 				'content'	=>	array(
 					0	=>	array(
 						'class'		=>	'edit',
-						'content'	=>	'<a href="' . ROOT . 'dictionary.php?mode=edit&amp;morpheme_id=' . $row['morpheme_id'] . '">edit</a>'
+						'content'	=>	'<a href="' . ROOT . 'dictionary.php?mode=edit&amp;morpheme_id=' . $row['morpheme_id'] . '">edit</a><br /><a href="' . ROOT . 'dictionary.php?mode=delete&amp;morpheme_id=' . $row['morpheme_id'] . '">delete</a>'
 					),
 					1	=>	array(
 						'content'	=>	'(' . $row['morpheme_id'] . ')'

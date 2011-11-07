@@ -370,12 +370,13 @@ class Forms
 
 				case 'radio':
 					print "\t\t<p>\n";
+					print "\t\t\t" . '<!--label for="' . $id_data['name'] . '"-->' . $id_data['label'] . '<!--/label--><br />' . "\n";
 
 					foreach( $id_data['data']['values'] as $value => $label )
 					{
 						$checked = ( isset( $id_data['data']['checked'] ) && ( $id_data['data']['checked'] == $value ) ) ? ' checked' : '';
 
-						print "\t\t\t" . '<label><input id="' . $id_data['id'] . ':' . ( $value + 3 ) . '" name="' . $id_data['name'] . '" type="radio" value="' . $value . '"' . $checked . ' />' . htmlentities( $label, ENT_QUOTES, 'UTF-8' ) . '</label><br />' . "\n";
+						print "\t\t\t" . '<label><input id="' . $id_data['id'] . ':' . $value . '" name="' . $id_data['name'] . '" type="radio" value="' . $value . '"' . $checked . ' />' . htmlentities( $label, ENT_QUOTES, 'UTF-8' ) . '</label><br />' . "\n";
 					}
 
 					print "\t\t</p>\n";

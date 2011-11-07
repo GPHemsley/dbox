@@ -22,6 +22,12 @@ define( 'DAT_MONTH', DAT_DAY * 30 );
 define( 'DAT_YEAR', DAT_DAY * 365 );
 define( 'DAT_LEAP_YEAR', DAT_DAY * 366 );
 
+/***
+ * Forms
+ */
+define( 'YES', 1 );
+define( 'NO', 0 );
+
 /**
  * User constants
  */

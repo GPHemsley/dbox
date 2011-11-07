@@ -50,6 +50,10 @@ switch( $mode )
 		$page_title[] = 'Edit Morpheme';
 	break;
 
+	case 'delete':
+		$page_title[] = 'Delete Morpheme';
+	break;
+
 	case 'view':
 	default:
 		$page_title[] = 'View Dictionary';
@@ -90,6 +94,10 @@ switch( $mode )
 
 	case 'edit':
 		$dbox->edit_morpheme( $morpheme_id );
+	break;
+
+	case 'delete':
+		$dbox->delete_morpheme( $morpheme_id );
 	break;
 
 	case 'view':

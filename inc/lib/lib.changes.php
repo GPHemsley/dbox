@@ -64,6 +64,32 @@ class Changes
 			return FALSE;
 		}
 	}
+
+	function get_user_changes( $user_id, $limit = NULL )
+	{
+		global $Database;
+
+		$limit_sql = ( !empty( $limit ) ) ? 'LIMIT ' . (int) $limit : '';
+
+		$sql = 'SELECT c.*
+			FROM changes c
+			WHERE c.user_id = ' . (int) $user_id . '
+			ORDER BY c.timestamp DESC
+			' . $limit_sql;
+
+		$result = $Database->query( $sql );
+
+		$user_changes = array();
+
+		while( $row = $Database->fetch_assoc( $result ) )
+		{
+			$user_changes[] = $row;
+		}
+
+		$Database->free_result( $result );
+
+		return $user_changes;
+	}
 }
 
 ?>

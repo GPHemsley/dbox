@@ -35,9 +35,13 @@ $dbox = new Home();
 
 ?>
 
-<p style="width: 50%; margin: auto; border: 3px double black; text-align: center;">I haven't decided what to put here yet.<br />Proceed to the <a href="<?php print ROOT; ?>records.php">Records</a> page.</p>
+<!--p style="width: 50%; margin: auto; border: 3px double black; text-align: center;">I haven't decided what to put here yet.<br />Proceed to the <a href="<?php print ROOT; ?>records.php">Records</a> page.</p-->
+
+<h2>Your Recent Changes</h2>
 
 <?php
+
+$dbox->get_my_changes();
 
 /**
  * Include the style footer, required for proper page output.

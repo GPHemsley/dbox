@@ -376,6 +376,12 @@ table.list th, table.list td {
 	padding: 0.25em;
 }
 
+table.list th a {
+	background-color: inherit;
+	color: inherit;
+	border-bottom: 1px dashed;
+}
+
 /*table.list td.edit {
 	background-color: #FFFFEE;
 	color: black;

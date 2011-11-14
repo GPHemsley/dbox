@@ -503,7 +503,7 @@ class Records extends Base
 			'style'	=>	'width: 5%;'
 		);
 		$headers[1] = array(
-			'content'	=>	'No.'
+			'content'	=>	'<a href="' . ROOT . 'records.php?mode=view' . ( ( $morpheme ) ? '&amp;morpheme=' . $morpheme : '' ) . '&amp;sort=id">No.</a>'
 		);
 
 /*		if( !$language_where )
@@ -534,15 +534,32 @@ class Records extends Base
 			'style'	=>	'width: 15%;'
 		);
 		$headers[5] = array(
-			'content'	=>	'Transcriber'
+			'content'	=>	'<a href="' . ROOT . 'records.php?mode=view' . ( ( $morpheme ) ? '&amp;morpheme=' . $morpheme : '' ) . '&amp;sort=transcriber">Transcriber</a>'
 		);
+
+		$sort_key = 'u.name';
+
+		if( exists( $_REQUEST['sort'] ) )
+		{
+			switch( $_REQUEST['sort'] )
+			{
+				case 'id':
+					$sort_key = 'r.record_id';
+				break;
+
+				case 'transcriber':
+				default:
+					$sort_key = 'u.name';
+				break;
+			}
+		}
 
 		$sql = 'SELECT r.*, u.name, u.email_address
 			FROM records r
 			LEFT JOIN ( users u )
 				ON ( r.creator_id = u.user_id )
 			' . $morpheme_where . '
-			ORDER BY u.name ASC, r.creation_time ASC'; // TODO: Remove this once tags are implemented.
+			ORDER BY ' . $sort_key . ' ASC, r.creation_time ASC'; // TODO: Remove this once tags are implemented.
 
 		$result = $Database->query( $sql );
 

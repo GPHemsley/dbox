@@ -385,6 +385,102 @@ class Records extends Base
 		Forms::create_form( 'edit-record', ROOT . 'records.php?mode=edit&amp;record_id=' . $record_id, $form_data );
 	}
 
+	public function delete_record( $record_id )
+	{
+		global $Database, $Changes, $User;
+
+		if( !$record_id )
+		{
+			print_message( 'bad', 'Please specify which record you want to delete.', 'Record ID not specified.' );
+
+			return FALSE;
+		}
+
+		$record_id = (int) $record_id;
+
+		$sql = 'SELECT r.*
+			FROM records r
+			WHERE r.record_id = ' . $record_id;
+
+		$result = $Database->query( $sql );
+		$entry = $Database->fetch_assoc( $result );
+		$Database->free_result( $result );
+
+		if( empty( $entry ) )
+		{
+			print_message( 'bad', 'There is no record matching that ID.', 'Unknown Record ID.' );
+
+			$this->view_records();
+
+			return;
+		}
+
+		$submit = ( exists( $_POST['submit'] ) ) ? TRUE : FALSE;
+
+		if( $submit )
+		{
+			$confirm = ( isset( $_POST['delete_record_confirm'] ) ) ? (bool) $_POST['delete_record_confirm'] : FALSE;
+
+			if( $confirm )
+			{
+				$sql = 'DELETE FROM records
+					WHERE record_id = ' . $record_id;
+
+				$result = $Database->query( $sql );
+
+				if( $result )
+				{
+					$Changes->track_change( $User->user_info['id'], 'record', $record_id, 'delete', NULL, serialize( $entry ) );
+
+					print_message( 'good', 'Record &quot;' . htmlentities( $entry['transcription'], ENT_QUOTES, 'UTF-8' ) . '&quot; deleted successfully.', 'Deletion succeeded.' );
+
+					$this->view_records();
+
+					return;
+				}
+			}
+			else
+			{
+				print_message( 'bad', 'Record &quot;' . htmlentities( $entry['transcription'], ENT_QUOTES, 'UTF-8' ) . '&quot; not deleted.', 'Deletion aborted.' );
+
+				$this->view_records();
+
+				return;
+			}
+		}
+
+		$form_data = array(
+			array(
+				'type'	=>	'header',
+				'label'	=>	'Delete Record',
+				'data'	=>	array(
+					'level'	=>	2,
+				)
+			),
+			array(
+				'type'	=>	'radio',
+				'name'	=>	'delete_record_confirm',
+				'label'	=>	'Are you sure you want to delete the elicitation entry for "' . htmlentities( $entry['transcription'], ENT_QUOTES, 'UTF-8' ) . '"?',
+				'data'	=>	array(
+					'checked'	=>	NO,
+					'values'	=>	array(
+						YES	=>	'Yes',
+						NO	=>	'No'
+					)
+				)
+			),
+			array(
+				'type'	=>	'submit',
+				'name'	=>	'submit',
+				'data'	=>	array(
+					'value'	=>	'Submit'
+				)
+			)
+		);
+
+		Forms::create_form( 'delete-record', ROOT . 'records.php?mode=delete&amp;record_id=' . $record_id, $form_data );
+	}
+
 	public function view_records( $morpheme = NULL )
 	{
 		global $Database, $User;
@@ -496,7 +592,7 @@ class Records extends Base
 				'content'	=>	array(
 					0	=>	array(
 						'class'		=>	'edit',
-						'content'	=>	'<a href="' . ROOT . 'records.php?mode=edit&amp;record_id=' . $row['record_id'] . '">edit</a>'
+						'content'	=>	'<a href="' . ROOT . 'records.php?mode=edit&amp;record_id=' . $row['record_id'] . '">edit</a><br /><a href="' . ROOT . 'records.php?mode=delete&amp;record_id=' . $row['record_id'] . '">delete</a>'
 					),
 					1	=>	array(
 						'content'	=>	'(' . $row['record_id'] . ')'

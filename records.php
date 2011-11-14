@@ -50,6 +50,10 @@ switch( $mode )
 		$page_title[] = 'Edit Record';
 	break;
 
+	case 'delete':
+		$page_title[] = 'Delete Record';
+	break;
+
 	case 'view':
 	default:
 		$page_title[] = 'View Records';
@@ -90,6 +94,10 @@ switch( $mode )
 
 	case 'edit':
 		$dbox->edit_record( $record_id );
+	break;
+
+	case 'delete':
+		$dbox->delete_record( $record_id );
 	break;
 
 	case 'view':

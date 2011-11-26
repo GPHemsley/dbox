@@ -66,9 +66,9 @@ $title = implode( ' :: ', $page_title ) . ' :: dbox';
 <body>
 
 <header id="header">
-	<!--div id="logo">
-		<a href="<?php print ROOT; ?>index.php"><img src="<?php print ROOT; ?>style/images/box_logo.png" alt="" width="75" height="75" /></a>
-	</div-->
+	<div id="logo">
+		<a href="<?php print ROOT; ?>index.php"><img src="<?php print ROOT; ?>style/images/favicon.png" alt="" width="32" height="32" /></a>
+	</div>
 	<div id="title">
 		<h1>dbox</h1>
 		<p style="margin: auto; /*font-variant: small-caps;*/ font-style: italic; font-family: cursive;">language documentation done right</p>

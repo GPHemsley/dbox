@@ -209,16 +209,13 @@ span.checkbox {
 
 #logo {
 	float: left;
-	width: 77px;
-	height: 77px;
 	margin: 0em;
 	padding: 0em 1em;
 }
 
 #logo img {
-	width: 75px;
-	height: 75px;
-	border: 1px solid white;
+	width: 32px;
+	height: 32px;
 }
 
 #title {

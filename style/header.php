@@ -45,17 +45,23 @@ switch( $tab )
 	break;
 }
 
+$breadcrumbs = implode( ' &rarr; ', $page_title );
+
+rsort( $page_title );
+
+$title = implode( ' :: ', $page_title ) . ' :: dbox';
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>dbox :: <?php print implode( ' :: ', $page_title ); ?></title>
+	<title><?php print $title; ?></title>
 
 	<link rel="stylesheet" type="text/css" href="<?php print ROOT; ?>style/screen.css" media="screen" />
 	<link rel="stylesheet" type="text/css" href="<?php print ROOT; ?>style/print.css" media="print" />
 
-	<link rel="icon" type="image/png" href="<?php print ROOT; ?>style/images/box_logo.png" />
+	<link rel="icon" type="image/png" href="<?php print ROOT; ?>style/images/favicon.png" />
 </head>
 <body>
 
@@ -107,7 +113,7 @@ if( !empty( $tab_dev ) )
 </nav>
 
 <div id="breadcrumbs">
-	<p><?php print implode( ' &rarr; ', $page_title ); ?></p>
+	<p><?php print $breadcrumbs; ?></p>
 </div>
 
 <?php

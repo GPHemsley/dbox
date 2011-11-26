@@ -28,6 +28,7 @@ require( ROOT . 'inc/lib/lib.dictionary.php' );
 $dbox = new Dictionary();
 
 $mode = ( exists( $_REQUEST['mode'] ) ) ? $_REQUEST['mode'] : 'view';
+$morpheme = ( exists( $_REQUEST['morpheme'] ) ) ? trim( $_REQUEST['morpheme'] ) : NULL;
 $morpheme_id = ( exists( $_REQUEST['morpheme_id'] ) ) ? (int) $_REQUEST['morpheme_id'] : FALSE;
 
 /*if( $mode == 'export' )
@@ -58,6 +59,17 @@ switch( $mode )
 	default:
 		$page_title[] = 'View Dictionary';
 	break;
+}
+
+// TODO: This works even in 'view' mode, which currently always displays the full dictionary.
+if( $morpheme )
+{
+	$page_title[] = $morpheme;
+}
+// TODO: Get actual morpheme from morpheme ID.
+elseif( $morpheme_id )
+{
+	$page_title[] = 'Morpheme ' . $morpheme_id;
 }
 
 /**

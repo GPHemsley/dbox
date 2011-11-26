@@ -28,6 +28,7 @@ require( ROOT . 'inc/lib/lib.records.php' );
 $dbox = new Records();
 
 $mode = ( exists( $_REQUEST['mode'] ) ) ? $_REQUEST['mode'] : 'view';
+$morpheme = ( exists( $_REQUEST['morpheme'] ) ) ? trim( $_REQUEST['morpheme'] ) : NULL;
 $record_id = ( exists( $_REQUEST['record_id'] ) ) ? (int) $_REQUEST['record_id'] : FALSE;
 
 if( $mode == 'export' )
@@ -58,6 +59,17 @@ switch( $mode )
 	default:
 		$page_title[] = 'View Records';
 	break;
+}
+
+if( $morpheme )
+{
+	$page_title[] = $morpheme;
+}
+
+// TODO: Get actual record from record ID.
+if( $record_id )
+{
+	$page_title[] = 'Record ' . $record_id;
 }
 
 /**

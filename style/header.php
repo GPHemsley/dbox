@@ -55,13 +55,13 @@ $title = implode( ' :: ', $page_title ) . ' :: dbox';
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="UTF-8" />
 	<title><?php print $title; ?></title>
 
-	<link rel="stylesheet" type="text/css" href="<?php print ROOT; ?>style/screen.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="<?php print ROOT; ?>style/print.css" media="print" />
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php print ROOT; ?>style/images/favicon.png" />
 
-	<link rel="icon" type="image/png" href="<?php print ROOT; ?>style/images/favicon.png" />
+	<link rel="stylesheet" type="text/css" media="screen" href="<?php print ROOT; ?>style/screen.css" />
+	<link rel="stylesheet" type="text/css" media="print" href="<?php print ROOT; ?>style/print.css" />
 </head>
 <body>
 

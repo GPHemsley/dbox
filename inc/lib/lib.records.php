@@ -106,6 +106,8 @@ class Records extends Base
 
 	private function _generate_gloss_table( $record, $grammaticality = GR_VAL_GOOD )
 	{
+		$creator_id = ( exists( $_REQUEST['creator_id'] ) ) ? (int) $_REQUEST['creator_id'] : NULL;
+
 		$gloss = $this->_parse_record( $record );
 
 		$g_symbol = $this->_get_grammaticality_symbol( $grammaticality );
@@ -144,7 +146,7 @@ class Records extends Base
 					$gloss_cells[$word_id][] = "\t\t" . '<td>' . htmlentities( $morpheme_gloss[0], ENT_QUOTES, 'UTF-8' ) . '</td>' . "\n";
 				}
 
-				$transcription_cells[$word_id][] = "\t\t" . '<td' . $transcription_class . '><a href="' . ROOT . 'records.php?mode=view&amp;morpheme=' . $morpheme . '">' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '</a></td>' . "\n";
+				$transcription_cells[$word_id][] = "\t\t" . '<td' . $transcription_class . '><a href="' . ROOT . 'records.php?mode=view&amp;morpheme=' . $morpheme . /*( ( $creator_id ) ? '&amp;creator_id=' . $creator_id : '' ) .*/ '">' . htmlentities( $morpheme, ENT_QUOTES, 'UTF-8' ) . '</a></td>' . "\n";
 			}
 
 			$transcription_row[] = implode( $morpheme_boundary, $transcription_cells[$word_id] );
@@ -481,14 +483,28 @@ class Records extends Base
 		Forms::create_form( 'delete-record', ROOT . 'records.php?mode=delete&amp;record_id=' . $record_id, $form_data );
 	}
 
-	public function view_records( $morpheme = NULL )
+	public function view_records( $morpheme = NULL, $creator_id = NULL )
 	{
 		global $Database, $User;
 
 		$columns = $headers = $rows = array();
 
 		$morpheme = ( !empty( $morpheme ) ) ? $morpheme : ( ( exists( $_REQUEST['morpheme'] ) ) ? trim( $_REQUEST['morpheme'] ) : NULL );
-		$morpheme_where = ( !empty( $morpheme ) ) ? "WHERE r.transcription REGEXP '^(.*[[:space:]-])?" . $Database->escape( $morpheme ) . "([[:space:]-].*)?$'" : '';
+		$creator_id = ( !empty( $creator_id ) ) ? $creator_id : ( ( exists( $_REQUEST['creator_id'] ) ) ? (int) $_REQUEST['creator_id'] : NULL );
+
+		$sql_wheres = array();
+
+		if( !empty( $morpheme ) )
+		{
+			$sql_wheres[] = "r.transcription REGEXP '^(.*[[:space:]-])?" . $Database->escape( $morpheme ) . "([[:space:]-].*)?$'";
+		}
+
+		if( !empty( $creator_id ) )
+		{
+			$sql_wheres[] = 'r.creator_id = ' . $creator_id;
+		}
+
+		$sql_where = ( !empty( $sql_wheres ) ) ? 'WHERE ' . implode( $sql_wheres, ' AND ' ) : '';
 
 //		$language_where = ( $this->language ) ? "AND r.language = '{$this->language}'" : '';
 
@@ -503,7 +519,7 @@ class Records extends Base
 			'style'	=>	'width: 5%;'
 		);
 		$headers[1] = array(
-			'content'	=>	'<a href="' . ROOT . 'records.php?mode=view' . ( ( $morpheme ) ? '&amp;morpheme=' . $morpheme : '' ) . '&amp;sort=id">No.</a>'
+			'content'	=>	'<a href="' . ROOT . 'records.php?mode=view' . ( ( $creator_id ) ? '&amp;creator_id=' . $creator_id : '' ) . ( ( $morpheme ) ? '&amp;morpheme=' . $morpheme : '' ) . '&amp;sort=id">No.</a>'
 		);
 
 /*		if( !$language_where )
@@ -534,7 +550,7 @@ class Records extends Base
 			'style'	=>	'width: 15%;'
 		);
 		$headers[5] = array(
-			'content'	=>	'<a href="' . ROOT . 'records.php?mode=view' . ( ( $morpheme ) ? '&amp;morpheme=' . $morpheme : '' ) . '&amp;sort=transcriber">Transcriber</a>'
+			'content'	=>	'<a href="' . ROOT . 'records.php?mode=view' . ( ( $creator_id ) ? '&amp;creator_id=' . $creator_id : '' ) . ( ( $morpheme ) ? '&amp;morpheme=' . $morpheme : '' ) . '&amp;sort=transcriber">Transcriber</a>'
 		);
 
 		$sort_key = 'u.name';
@@ -558,7 +574,7 @@ class Records extends Base
 			FROM records r
 			LEFT JOIN ( users u )
 				ON ( r.creator_id = u.user_id )
-			' . $morpheme_where . '
+			' . $sql_where . '
 			ORDER BY ' . $sort_key . ' ASC, r.creation_time ASC'; // TODO: Remove this once tags are implemented.
 
 		$result = $Database->query( $sql );
@@ -624,7 +640,7 @@ class Records extends Base
 						'content'	=>	$this->convert_newlines( htmlentities( $row['comments'], ENT_QUOTES, 'UTF-8' ) )
 					),
 					5	=>	array(
-						'content'	=>	'<a href="mailto:' . str_replace( '%40', '&#x0040;', rawurlencode( $row['email_address'] ) ) . '?subject=' . rawurlencode( '[dbox] Elicitation ' . $row['record_id'] . ': ' . $row['transcription'] ) . '" class="creator">' . htmlentities( $row['name'], ENT_QUOTES, 'UTF-8' ) . '</a><br /><span class="creation-time">' . $this->format_date( $row['creation_time'], 'F j, Y' ) . '</span>'
+						'content'	=>	/*'<a href="mailto:' . str_replace( '%40', '&#x0040;', rawurlencode( $row['email_address'] ) ) . '?subject=' . rawurlencode( '[dbox] Elicitation ' . $row['record_id'] . ': ' . $row['transcription'] ) . '" class="creator">'*/ '<a href="' . ROOT . 'records.php?mode=view&amp;creator_id=' . $row['creator_id'] . ( ( $morpheme ) ? '&amp;morpheme=' . $morpheme : '' ) . '" class="creator">' . htmlentities( $row['name'], ENT_QUOTES, 'UTF-8' ) . '</a><br /><span class="creation-time">' . $this->format_date( $row['creation_time'], 'F j, Y' ) . '</span>' // TODO: Include sort.
 					),
 				)
 			);

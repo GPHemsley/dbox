@@ -7,7 +7,7 @@
  *
  * @package dbox
  * @copyright (C) 2006-2010 Gordon P. Hemsley
- * @license docs/LICENSE BSD License
+ * @license docs/LICENSE Mozilla Public License, v. 2.0
  * @version $Id: lib.base.php 93 2011-10-04 19:51:20Z gphemsley $
  */
 

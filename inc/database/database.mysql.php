@@ -6,8 +6,8 @@
  * Functions to use when manipulating a MySQL database.
  *
  * @package DBAL
- * @copyright (C) 2003-2007 CMSformE, 2006-2010, 2011 Gordon P. Hemsley
- * @license docs/LICENSE BSD License
+ * @copyright (C) 2003-2007 CMSformE; (C) 2006-2010, 2011-2012 Gordon P. Hemsley
+ * @license docs/LICENSE Mozilla Public License, v. 2.0
  */
 
 if( !defined( 'ROOT' ) )

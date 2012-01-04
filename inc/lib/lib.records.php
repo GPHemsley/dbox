@@ -6,8 +6,8 @@
  * This contains all of the records functions.
  *
  * @package dbox
- * @copyright (C) 2006-2010, 2011 Gordon P. Hemsley
- * @license docs/LICENSE BSD License
+ * @copyright (C) 2006-2010, 2011-2012 Gordon P. Hemsley
+ * @license docs/LICENSE Mozilla Public License, v. 2.0
  */
 
 /**

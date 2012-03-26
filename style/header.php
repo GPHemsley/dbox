@@ -24,7 +24,7 @@ if( !isset( $tab ) )
 	$tab = FALSE;
 }
 
-$tab_home = $tab_records = $tab_dictionary = $tab_dev = '';
+$tab_home = $tab_records = $tab_dictionary = $tab_export = $tab_dev = '';
 
 switch( $tab )
 {

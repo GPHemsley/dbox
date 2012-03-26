@@ -153,12 +153,11 @@ class Database
 		}
 		else
 		{
+			$queries = array();
+
 			if( is_array( $query ) )
 			{
-				foreach( $query as $single_query )
-				{
-						$queries[] = $single_query;
-				}
+				$queries = array_merge( $queries, $query );
 			}
 			else
 			{
@@ -186,6 +185,10 @@ class Database
 					{
 						$this->results[$this->query_count] = $result;
 					}
+				}
+				else
+				{
+					$results[$this->query_count] = FALSE;
 				}
 			}
 

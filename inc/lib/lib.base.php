@@ -6,7 +6,7 @@
  * This contains the functions common to all child classes of dbox.
  *
  * @package dbox
- * @copyright (C) 2006-2010 Gordon P. Hemsley
+ * @copyright (C) 2006-2010, 2011-2012 Gordon P. Hemsley
  * @license docs/LICENSE Mozilla Public License, v. 2.0
  * @version $Id: lib.base.php 93 2011-10-04 19:51:20Z gphemsley $
  */
@@ -354,36 +354,39 @@ class Base
 				print "\t\t\t" . '<tfoot style="border-top: 3px solid black;">' . "\n";
 			}
 
-			print "\t\t\t\t" . '<tr>' . "\n";
-
-			foreach( $headers as $head )
+			if( !empty( $headers ) )
 			{
-				if( does_not_exist( $head['content'] ) )
+				print "\t\t\t\t" . '<tr>' . "\n";
+
+				foreach( $headers as $head )
 				{
-					$head['content'] = '&nbsp;';
+					if( does_not_exist( $head['content'] ) )
+					{
+						$head['content'] = '&nbsp;';
+					}
+
+					print "\t\t\t\t\t" . '<th';
+
+					if( exists( $head['colspan'] ) )
+					{
+						print ' colspan="' . $head['colspan'] . '"';
+					}
+
+					if( exists( $head['class'] ) )
+					{
+						print ' class="' . $head['class'] . '"';
+					}
+
+					if( exists( $head['style'] ) )
+					{
+						print ' style="' . $head['style'] . '"';
+					}
+
+					print '>' . $head['content'] . '</th>' . "\n";
 				}
 
-				print "\t\t\t\t\t" . '<th';
-
-				if( exists( $head['colspan'] ) )
-				{
-					print ' colspan="' . $head['colspan'] . '"';
-				}
-
-				if( exists( $head['class'] ) )
-				{
-					print ' class="' . $head['class'] . '"';
-				}
-
-				if( exists( $head['style'] ) )
-				{
-					print ' style="' . $head['style'] . '"';
-				}
-
-				print '>' . $head['content'] . '</th>' . "\n";
+				print "\t\t\t\t" . '</tr>' . "\n";
 			}
-
-			print "\t\t\t\t" . '</tr>' . "\n";
 
 			if( $top )
 			{

@@ -44,6 +44,6 @@ $config['message'] = array(
  * Version information.
  */
 
-define( 'DBOX_VERSION', '0.4' );
+define( 'DBOX_VERSION', '0.5-dev' );
 
 ?>

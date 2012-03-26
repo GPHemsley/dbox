@@ -435,36 +435,6 @@ class Dictionary extends Base
 
 		$this->print_list_table( ROOT . 'dictionary.php', $columns, $headers, $rows );
 	}
-
-/*	public function export_records()
-	{
-		global $Database, $User;
-
-		header( 'Content-Type: text/csv; charset=UTF-8' );
-		header( 'Content-Disposition: attachment; filename=dbox.csv' );
-
-		$sql = 'SELECT r.*, u.name
-			FROM records r
-			LEFT JOIN ( users u )
-				ON ( r.creator_id = u.user_id )
-			ORDER BY r.creation_time ASC';
-
-		$result = $Database->query( $sql );
-
-		if( !$Database->has_result( $result ) )
-		{
-			// Oh well.
-		}
-
-		print 'record_id,transcription,translation,comments,grammaticality,creator_id,creation_time' . "\n";
-
-		while( $row = $Database->fetch_assoc( $result ) )
-		{
-			print $row['record_id'] . ',"' . $this->_csv_escape( $row['transcription'] ) . '","' . $this->_csv_escape( $row['translation'] ) . '","' . $this->_csv_escape( $row['comments'] ) . '",' . $row['grammaticality'] . ',' . $row['creator_id'] . ',' . $row['creation_time'] . "\n";
-		}
-
-		$Database->free_result( $result );
-	}*/
 }
 
 ?>

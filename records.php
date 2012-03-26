@@ -31,13 +31,6 @@ $mode = ( exists( $_REQUEST['mode'] ) ) ? $_REQUEST['mode'] : 'view';
 $morpheme = ( exists( $_REQUEST['morpheme'] ) ) ? trim( $_REQUEST['morpheme'] ) : NULL;
 $record_id = ( exists( $_REQUEST['record_id'] ) ) ? (int) $_REQUEST['record_id'] : FALSE;
 
-if( $mode == 'export' )
-{
-	$dbox->export_records();
-
-	exit;
-}
-
 /**
  * Have the title reflect the mode.
  */
@@ -85,10 +78,6 @@ $sub_nav = array(
 	'add'	=>	array(
 		'title'	=>	'Add Record',
 		'url'	=>	ROOT . 'records.php?mode=add'
-	),
-	'export'	=>	array(
-		'title'	=>	'Export Records',
-		'url'	=>	ROOT . 'records.php?mode=export'
 	),
 );
 

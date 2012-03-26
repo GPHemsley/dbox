@@ -31,13 +31,6 @@ $mode = ( exists( $_REQUEST['mode'] ) ) ? $_REQUEST['mode'] : 'view';
 $morpheme = ( exists( $_REQUEST['morpheme'] ) ) ? trim( $_REQUEST['morpheme'] ) : NULL;
 $morpheme_id = ( exists( $_REQUEST['morpheme_id'] ) ) ? (int) $_REQUEST['morpheme_id'] : FALSE;
 
-/*if( $mode == 'export' )
-{
-	$dbox->export_records();
-
-	exit;
-}*/
-
 /**
  * Have the title reflect the mode.
  */
@@ -86,10 +79,6 @@ $sub_nav = array(
 		'title'	=>	'Add Morpheme',
 		'url'	=>	ROOT . 'dictionary.php?mode=add'
 	),
-/*	'export'	=>	array(
-		'title'	=>	'Export Records',
-		'url'	=>	ROOT . 'dictionary.php?mode=export'
-	),*/
 );
 
 ?>

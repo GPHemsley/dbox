@@ -40,6 +40,10 @@ switch( $tab )
 		$tab_dictionary = ' class="selected"';
 	break;
 
+	case 'export':
+		$tab_export = ' class="selected"';
+	break;
+
 	case 'dev':
 		$tab_dev = ' class="selected"';
 	break;
@@ -101,6 +105,7 @@ else
 		<li<?php print $tab_home; ?>><a href="<?php print ROOT; ?>index.php">Home</a></li>
 		<li<?php print $tab_records; ?>><a href="<?php print ROOT; ?>records.php">Elicitations</a></li>
 		<li<?php print $tab_dictionary; ?>><a href="<?php print ROOT; ?>dictionary.php">Dictionary</a></li>
+		<li<?php print $tab_export; ?>><a href="<?php print ROOT; ?>export.php">Export</a></li>
 <?php
 
 if( !empty( $tab_dev ) )

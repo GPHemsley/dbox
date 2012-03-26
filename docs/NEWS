@@ -18,12 +18,40 @@
 
 >============================[ FUTURE RELEASES ]=============================<
 
-2012-XX-XX :: dbox 0.4
+2012-XX-XX :: dbox 0.5
 
 * ???
 
 
 >============================[ CURRENT RELEASE ]=============================<
+
+2012-03-26 :: dbox 0.4
+
+* Officially licensed dbox under the Mozilla Public License, v. 2.0.
+** This applies retroactively to the previous code revisions, as well.
+* Added database schema to the source so that independent installations can be
+  made.
+* Added full and proper support for exporting language data.
+** Currently supports text and CSV formats.
+* Improved the structure of the 'changes' table for better change tracking.
+** Script provided to upgrade existing table structure.
+** Your recent changes are (crudely) displayed on the Home page.
+* Added ability to delete morphemes from the lexicon.
+* Added ability to delete elicitations.
+* Added basic sorting to elicitations.
+** Elicitations can now be sorted by elicitation ID and transcriber name.
+* Added ability to filter elicitations by transcriber.
+* Stopped attempting to add the same morpheme more than once.
+* Added morphemes to breadcrumbs of morpheme-specific pages.
+* Improved in-browser navigation by reversing the order of title breadcrumbs
+  and adding a favicon.
+* Added a development script to view changes made to the lexicon.
+* Fixed a display bug where a header row would be output even if there weren't
+  any header cells.
+* Simplified some DBAL code and ensured that all queries return a result.
+
+
+>=============================[ PAST RELEASES ]==============================<
 
 2011-10-24 :: dbox 0.3.1
 
@@ -32,8 +60,6 @@
 * Added print stylesheet to the source code. (How embarassing.)
 * Ensured at least basic support for HTML5 elements in older browsers.
 
-
->=============================[ PAST RELEASES ]==============================<
 
 2011-10-24 :: dbox 0.3
 

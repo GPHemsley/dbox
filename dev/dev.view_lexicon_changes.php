@@ -1,9 +1,9 @@
 <?php
 
 /**
- * dbox :: dev/convert_changes.php
+ * dbox :: dev/dev.view_lexicon_changes.php
  *
- * Convert changes table to new table structure (v0.4).
+ * View changes to the lexicon.
  *
  * @package dbox
  * @copyright (C) 2011-2012 Gordon P. Hemsley
